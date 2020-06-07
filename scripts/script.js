@@ -1,6 +1,6 @@
 const feedback = (message) => {
 	var feedback = document.querySelector(".feedbackMessage");
-	feedback.innerHTML += `<p>${message}</p>`;
+	feedback.innerHTML += `<li>${message}</li>`;
 };
 // var uuid = "00002a37-0000-1000-8000-00805f9b34fb";
 const handleChange = (event) => {
@@ -9,7 +9,7 @@ const handleChange = (event) => {
 	for (var i = 0; i < value.byteLength; i++) {
 		a.push("0x" + ("00" + value.getUint8(i).toString(16)).slice(-2));
 	}
-	log("> " + a.join(" "));
+	feedback("> " + a.join(" "));
 };
 // var uuid = "00000009-0000-3512-2118-0009af100700";
 var options = { acceptAllDevices: true, optionalServices: ["heart_rate"] };
@@ -17,7 +17,7 @@ const trigger = document.querySelector(".main_btn");
 trigger.addEventListener("click", async () => {
 	try {
 		var device = await navigator.bluetooth.requestDevice(options);
-		feedback(device.name);
+		feedback("Connected to ",device.name);
 
 		var server = await device.gatt.connect();
 		console.log(server);
@@ -35,7 +35,7 @@ trigger.addEventListener("click", async () => {
         // var descriptors = await characteristic.getDescriptors()
         // console.log(descriptors)
 		// feedback("descriptors retrieved");
-		// characteristic.addEventListener("characteristicvaluechanged", handleChange);
+		characteristic.addEventListener("characteristicvaluechanged", handleChange);
 		// var value = await characteristic.readValue()
 		// console.log(value.getInt8(0))
 	} catch (e) {
