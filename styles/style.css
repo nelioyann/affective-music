@@ -44,7 +44,7 @@ main{
   margin-top: 2em;
   list-style-type: none;
   border-radius: 1em;
-  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.116);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.219);
   color: var(--blackH);
   line-height: 2;
   width: 100%;
@@ -53,7 +53,7 @@ main{
   padding: 5px;
   height: 300px;
   overflow: auto;
-  border-radius: 2px;
+  border-radius: 0.3em;
 }
 .hr{
   /* color: ; */
