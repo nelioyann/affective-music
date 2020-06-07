@@ -65,12 +65,14 @@ main{
 .btns{
   display: flex;
   justify-content: space-between;
+  margin: 1em 0;
 }
 .connect, .disconnect, .mute{
   outline: none;
   border: none;
+  border-radius: 1em;
   cursor: pointer;
-  padding: .8em 1em;
+  padding: .5em 0.7em;
   background-color: var(--blueH);
   color: var(--whiteL);
 }

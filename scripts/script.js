@@ -5,6 +5,8 @@ const feedback = (message) => {
 // var uuid = "00002a37-0000-1000-8000-00805f9b34fb";
 
 const handleChange = (event) => {
+        document.querySelector("audio").play()
+
 	let value = event.target.value;
     // feedback(value)
 	var a = [];
@@ -15,7 +17,7 @@ const handleChange = (event) => {
 	// feedback(typeof value);
     document.querySelector(".heart").style.animationDuration = `${1300 - parseInt(value) *10}ms`
     document.querySelector(".hr").innerHTML = `${parseInt(value) }bpm `
-    document.querySelector("audio").playbackRate = `${parseInt(value) / 10}`
+    document.querySelector("audio").playbackRate = `${parseInt(value) / 100}`
     feedback(`Play rate speed: ${parseInt(value) / 100}`)
 };
 // var uuid = "00000009-0000-3512-2118-0009af100700";
@@ -24,7 +26,6 @@ const trigger = document.querySelector(".connect");
 trigger.addEventListener("click", async () => {
 	try {
         
-        document.querySelector("audio").play()
 		var device = await navigator.bluetooth.requestDevice(options);
 		feedback(`Connection established to the device`);
 
