@@ -74,6 +74,7 @@ main{
 }
 
 .heart{
+  font-size: 2em;
   text-align: center;
   animation: heartbeat ;
   animation-duration: 0s;
