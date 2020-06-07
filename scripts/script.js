@@ -2,12 +2,14 @@ const feedback = (message) => {
 	var feedback = document.querySelector(".feedbackMessage");
 	feedback.innerHTML += `<li>${message}</li>`;
 };
-let hr = document.querySelector(".hr")
 // var uuid = "00002a37-0000-1000-8000-00805f9b34fb";
 const handleChange = (event) => {
-	let value = event.target.value;
-	
-	hr.innerHTML = value;
+	var value = event.target.value;
+	var a = [];
+	for (var i = 0; i < value.byteLength; i++) {
+		a.push("0x" + ("00" + value.getUint8(i).toString(16)).slice(-2));
+	}
+	feedback(parseInt(a.join(" ")));
 };
 // var uuid = "00000009-0000-3512-2118-0009af100700";
 var options = { acceptAllDevices: true, optionalServices: ["heart_rate"] };
