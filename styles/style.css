@@ -3,7 +3,7 @@
   --blueH: #192a56;
   --greyL: #7f8fa6;
   --whiteL: #f5f6fa;
-  --orangeL: #e84118;
+  --orangeL: #ff0000;
 }
 
 * {
@@ -64,7 +64,7 @@ main{
   display: flex;
   justify-content: space-between;
 }
-.connect, .disconnect{
+.connect, .disconnect, .mute{
   outline: none;
   border: none;
   cursor: pointer;

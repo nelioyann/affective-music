@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./styles/style.css">
-    <title>Yann's Boiler Plate</title>
+    <title>Heart Beat Music</title>
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -23,25 +23,28 @@
 <body>
     <div class="site_wrapper">
         <main>
-        <h1>Beating Website ♥</h1>
-        <p>The color adapts to the beat of your heart</p>
+            <h1>Beating Website ♥</h1>
+            <p>The color adapts to the beat of your heart</p>
             <h1 class="hr">__</h1>
             <h1 class="heart">♥</h1>
             <div class="btns">
-                 <button class="connect">Connect your Miband</button>
-                    <button class="disconnect">Disconnect your Miband</button>
+                <button class="connect">Connect your Miband</button>
+                <button class="disconnect">Disconnect your Miband</button>
+                <button class="mute">Toggle song</button>
             </div>
-           
+
             <ul class="feedbackMessage">
-               <h3>Logs</h3>
+                <h3>Logs</h3>
             </ul>
-            
+            <audio loop>
+                <source src="./astronomia.mp3" type="audio/mpeg">
+            </audio>
         </main>
         <footer>
 
         </footer>
     </div>
-    
+
     <script src="./scripts/script.js"></script>
 
 </body>

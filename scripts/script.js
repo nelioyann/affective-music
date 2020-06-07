@@ -15,6 +15,7 @@ const handleChange = (event) => {
 	// feedback(typeof value);
     document.querySelector(".heart").style.animationDuration = `${1300 - parseInt(value) *10}ms`
     document.querySelector(".hr").innerHTML = `${parseInt(value) }bpm `
+    document.querySelector("audio").playbackRate = `${parseInt(value) / 10}`
 };
 // var uuid = "00000009-0000-3512-2118-0009af100700";
 var options = { acceptAllDevices: true, optionalServices: ["heart_rate"] };
@@ -22,6 +23,7 @@ const trigger = document.querySelector(".connect");
 trigger.addEventListener("click", async () => {
 	try {
         
+        document.querySelector("audio").play()
 		var device = await navigator.bluetooth.requestDevice(options);
 		feedback(`Connection established to the device`);
 
