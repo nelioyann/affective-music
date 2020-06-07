@@ -17,8 +17,8 @@ const handleChange = (event) => {
 	// feedback(typeof value);
     document.querySelector(".heart").style.animationDuration = `${1300 - parseInt(value) *10}ms`
     document.querySelector(".hr").innerHTML = `${parseInt(value) }bpm `
-    document.querySelector("audio").playbackRate = `${parseInt(value) / 100}`
-    feedback(`Play rate speed: ${parseInt(value) / 100}`)
+    document.querySelector("audio").playbackRate = `${parseInt(value) / 100 + 0.4}`
+    feedback(`Play rate speed: ${parseInt(value) / 100 + 0.4}`)
 };
 // var uuid = "00000009-0000-3512-2118-0009af100700";
 var options = { acceptAllDevices: true, optionalServices: ["heart_rate"] };
