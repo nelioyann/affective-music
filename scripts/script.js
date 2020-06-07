@@ -9,7 +9,7 @@ const handleChange = (event) => {
 	for (var i = 0; i < value.byteLength; i++) {
 		a.push("0x" + ("00" + value.getUint8(i).toString(16)).slice(-2));
 	}
-	feedback(parseInt(a.join(" ")));
+	feedback((a.join(" ")));
 };
 // var uuid = "00000009-0000-3512-2118-0009af100700";
 var options = { acceptAllDevices: true, optionalServices: ["heart_rate"] };
