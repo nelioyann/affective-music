@@ -4,10 +4,11 @@ const feedback = (message) => {
 };
 // var uuid = "00002a37-0000-1000-8000-00805f9b34fb";
 const handleChange = (event) => {
-	var value = event.target.value;
+	let value = event.target.value;
+    feedback(value)
 	var a = [];
 	for (var i = 0; i < value.byteLength; i++) {
-		a.push((value.getUint8(i).toString(16)).slice(-2));
+		a.push("0x" + ("00" + value.getUint8(i).toString(16)).slice(-2));
 	}
 	feedback((a.join(" ")));
 };
