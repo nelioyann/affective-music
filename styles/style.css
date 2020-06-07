@@ -75,7 +75,9 @@ main{
 
 .heart{
   text-align: center;
-  animation: heartbeat 1s infinite;
+  animation: heartbeat ;
+  animation-duration: 0s;
+  animation-iteration-count: infinite;
 }
 
 @keyframes heartbeat
