@@ -13,7 +13,8 @@ const handleChange = (event) => {
 	}
     value = (a.join(" ")).slice(-4)
 	// feedback(typeof value);
-    document.querySelector(".hr").innerHTML = `${parseInt(value) }bpm`
+    document.querySelector(".heart").style.animationDuration = `${1500 - parseInt(value) *10}ms`
+    document.querySelector(".hr").innerHTML = `${parseInt(value) }bpm <h2 class="heart">♥</h2>`
 };
 // var uuid = "00000009-0000-3512-2118-0009af100700";
 var options = { acceptAllDevices: true, optionalServices: ["heart_rate"] };
