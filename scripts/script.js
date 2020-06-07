@@ -6,13 +6,13 @@ const feedback = (message) => {
 
 const handleChange = (event) => {
 	let value = event.target.value;
-    feedback(value)
+    // feedback(value)
 	var a = [];
 	for (var i = 0; i < value.byteLength; i++) {
 		a.push("0x" + ("00" + value.getUint8(i).toString(16)).slice(-2));
 	}
     value = (a.join(" ")).slice(-4)
-	feedback(value);
+	feedback(typeof value);
     document.querySelector(".hr").innerHTML = value
 };
 // var uuid = "00000009-0000-3512-2118-0009af100700";

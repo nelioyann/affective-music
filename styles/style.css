@@ -57,3 +57,6 @@ main{
   /* display: none; */
   z-index: 3;
 }
+.hr{
+  color: aliceblue;
+}
