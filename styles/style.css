@@ -9,24 +9,21 @@
 * {
   box-sizing: border-box;
   font-family: sans-serif;
+  margin: 0;
+  font-weight: lighter;
 }
 
 body {
   margin: 0;
   padding: 0;
-  /* -webkit-user-select: none; */
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
 }
-
-
 
 .site_wrapper {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background-color: var(--blackH);
-  color: var(--whiteL);
+  color: var(--blackH);
+  background-color: var(--whiteL);
 
 }
 
@@ -43,9 +40,10 @@ main{
 .feedbackMessage {
   min-width: 280px;
   margin-top: 2em;
-  /* text-align: center; */
-  background-color: rgb(255, 255, 255);
-  color: black;
+  list-style-type: none;
+  border-radius: 1em;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.116);
+  color: var(--blackH);
   line-height: 2;
   min-width: 200px;
   max-width: 600px;
@@ -58,5 +56,15 @@ main{
   z-index: 3;
 }
 .hr{
-  color: aliceblue;
+  /* color: ; */
+  margin: 0 auto 1em;
+}
+
+.connect{
+  outline: none;
+  border: none;
+  cursor: pointer;
+  padding: .8em 1em;
+  background-color: var(--blueH);
+  color: var(--whiteL);
 }
