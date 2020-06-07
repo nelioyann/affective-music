@@ -3,6 +3,7 @@ const feedback = (message) => {
 	feedback.innerHTML += `<li>${message}</li>`;
 };
 // var uuid = "00002a37-0000-1000-8000-00805f9b34fb";
+
 const handleChange = (event) => {
 	let value = event.target.value;
     feedback(value)
@@ -12,6 +13,7 @@ const handleChange = (event) => {
 	}
     value = (a.join(" ")).slice(-4)
 	feedback(value);
+    document.querySelector(".hr").innerHTML = value
 };
 // var uuid = "00000009-0000-3512-2118-0009af100700";
 var options = { acceptAllDevices: true, optionalServices: ["heart_rate"] };
