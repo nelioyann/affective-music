@@ -15,12 +15,14 @@
 
 body {
   margin: 0;
-  padding: 1em;
+  padding: 0;
 }
 
 .site_wrapper {
   position: relative;
   width: 100%;
+  padding: 1em;
+  overflow: hidden;
   min-height: 100vh;
   color: var(--blackH);
   background-color: var(--whiteL);
