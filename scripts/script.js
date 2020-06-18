@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     alert("it worked")
 		console.log(json);
 	}
-
+  
 	
   const handleChange = (event) => {
     let value = event.target.value;
@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     value = a.join(" ").slice(-4);
     hr_value.innerHTML = `${parseInt(value)}`;
+    getSongs(50)
 
   };
   // var uuid = "00000009-0000-3512-2118-0009af100700";
