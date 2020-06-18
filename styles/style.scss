@@ -1,0 +1,199 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap");
+
+// Media Queries
+@mixin minq($arg) {
+  @media screen and (min-width: $arg) {
+    @content;
+  }
+}
+
+
+
+$color_dark: #4a506d;
+$color_light: #e2d6d6;
+$color_primary: #ea1a4d;
+$font_headings: "Montserrat Alternates", sans-serif;
+$font_body: "Nunito", sans-serif;
+$size_mobile: 320px;
+$size_tablet: 768px;
+$size_desktop: 1024px;
+
+:root {
+  font-size: 15px;
+  @include minq($size_mobile) {
+    font-size: 13px;
+  }
+
+  @include minq($size_tablet) {
+    font-size: 19px;
+  }
+  @include minq($size_desktop) {
+    font-size: 23px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.site_wrapper {
+  width: 100%;
+  padding: 1em;
+  overflow: hidden;
+  min-height: 100vh;
+  font-family: $font_body;
+  color: $color_light;
+  position: relative;
+  background-color: rgba($color_dark, 0.9);
+  /* color: $color_dark;
+  background-color: $color_light; */
+}
+
+.site_wrapper::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-image: url("../images/zenrocks.jpg");
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  z-index: -2;
+}
+
+main {
+  min-width: 270px;
+  width: 100%;
+  margin: auto;
+}
+
+.header {
+  display: none;
+  &__heading {
+    font-family: $font_headings;
+  }
+}
+
+.measures {
+  height: 40vh;
+  width: 100%;
+  display: flex;
+  // flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  &__bpm {
+    
+    // margin: 2em 0;
+    display: flex;
+    align-items: baseline;
+    
+    &__value{
+      font-size: 4em;
+      color: $color_primary;
+      font-family: $font_headings;
+      // margin-top: auto;
+    }
+    &__label{
+      font-size: 1em;
+      // margin-top: auto;
+    }
+  }
+  &__heart {
+    background-color: $color_primary;
+    cursor: pointer;
+    width: 5em;
+    height: 5em;
+    border-radius: 50%;
+    padding: 1em;
+    animation: pulse;
+    animation-duration: 4s;
+    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+    animation-iteration-count: infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__image {
+      width: 100%;
+      height: 100%;
+      &_beating {
+        animation: heartbeat;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+      }
+      path {
+        fill: $color_light;
+      }
+    }
+  }
+  &__slider {
+    display: block;
+  }
+}
+
+.connection {
+  background-color: $color_dark;
+  &__button {
+    display: none;
+    outline: none;
+    border: none;
+    border-radius: 0.2em;
+    cursor: pointer;
+    padding: 0.5em 0.7em;
+  }
+}
+
+.feedbackMessage {
+  min-width: 280px;
+  margin-top: 2em;
+  list-style-type: none;
+  border-radius: 1em;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.219);
+  color: $color_dark;
+  line-height: 2;
+  width: 100%;
+  padding: 5px;
+  height: 300px;
+  overflow: auto;
+  border-radius: 0.3em;
+}
+
+.beating_heart {
+  font-size: 2em;
+  text-align: center;
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(0.75);
+  }
+  25% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.75);
+  }
+  75% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.75);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba($color_primary, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 3em rgba($color_primary, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba($color_primary, 0);
+  }
+}

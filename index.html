@@ -14,37 +14,57 @@
     <meta property="og:image" content="./images/icons/icon-152x152.png" />
     <link rel="apple-touch-icon" href="./images/icons/icon-152x152.png" />
     <meta name="description" content="This website changes tothe beat of your heart.">
-    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="./images/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
-    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/icons/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="./images/icons/favicon.ico">
 </head>
 
 <body>
     <div class="site_wrapper">
+        <header class="header">
+            <h1 class="header__heading">Affective Music</h1>
+            <!-- <p class="header__tagline">The music adapts to the beat of your heart</p> -->
+        </header>
         <main>
-            <h1>Heart Beat Music ♥</h1>
-            <p>The music adapts to the beat of your heart</p>
-            <h1 class="hr">__</h1>
-            <h1 class="heart">♥</h1>
-            <div class="btns">
-                <button class="connect">Connect your Miband</button>
-                <button class="disconnect">Disconnect your Miband</button>
-                <button class="mute">Toggle song</button>
+            <div class="measures">
+                <div class="measures__heart measures__heart">
+                    <svg class="measures__heart__image measures__heart__image_beating" width="102" height="91" viewBox="0 0 102 91" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M50.9797 90.8333L93.5374 48.2757C104.609 37.2143 104.609 19.6768 93.5374 8.55449C82.4151 -2.50684 64.8877 -2.50684 53.8162 8.55449L50.9899 11.391L48.1534 8.55449C37.0921 -2.50684 19.5546 -2.50684 8.43223 8.55449C-2.6291 19.6768 -2.6291 37.2042 8.43223 48.2757L50.9797 90.8333Z"
+                            fill="#FF0000" />
+                    </svg>
+                </div>
+                <div class="measures__bpm">
+                    <div class="measures__bpm__value">67</div>
+                    <div class="measures__bpm__label">BPM</div>
+                </div>
+                <!-- <div class="measures__slider"></div> -->
             </div>
 
-            <ul class="feedbackMessage">
+            <div class="player"></div>
+
+            <!-- <div class="connection">
+                <button class="connection__button connect">Connect</button>
+                <button class="connection__button disconnect">Disconnect</button>
+            </div> -->
+
+            <!-- <ul class="feedbackMessage">
                 <h3>Logs</h3>
-            </ul>
+            </ul> -->
             <audio loop>
                 <source src="./astronomia.mp3" type="audio/mpeg">
             </audio>
         </main>
+
         <footer>
 
         </footer>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"
+        integrity="sha256-Tp/HPdYebMPmgPDCAs8Et4j+VUKuOWmAZdhegRS4O4g=" crossorigin="anonymous"></script>
     <script src="./scripts/script.js"></script>
 
 </body>
