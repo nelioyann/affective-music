@@ -3,25 +3,31 @@ document.addEventListener("DOMContentLoaded", () => {
 	const hr_value = document.querySelector(".measures__bpm__value");
 
 
+	const getSongs = async (bpm) => {
+		const params = new URLSearchParams({
+			origin: "*",
+		  api_key: "2d1f0b47e83725b74f4334664ffedabd",
+		  bpm: bpm,
 
-  // var uuid = "00002a37-0000-1000-8000-00805f9b34fb";
+    });
+    alert('will it work')
+		const url = `https://api.getsongbpm.com/tempo/?${params.toString()}`;
+		let response = await fetch(url);
+    let json = await response.json();
+    alert("it worked")
+		console.log(json);
+	}
 
+	
   const handleChange = (event) => {
-    // document.querySelector("audio").play();
-
     let value = event.target.value;
     var a = [];
     for (var i = 0; i < value.byteLength; i++) {
       a.push("0x" + ("00" + value.getUint8(i).toString(16)).slice(-2));
     }
     value = a.join(" ").slice(-4);
-    // feedback(typeof value);
-    // document.querySelector(".heart").style.animationDuration = `${1300 - parseInt(value) *10}ms`
-    hr_value.innerHTML = `${parseInt(value)}bpm `;
-    // let playbackspeed = parseInt(value) / 100 + 0.2;
-    // playbackspeed = playbackspeed.toFixed(1);
-    // document.querySelector("audio").playbackRate = playbackspeed;
-    // feedback(`Play rate speed: ${playbackspeed}`);
+    hr_value.innerHTML = `${parseInt(value)}`;
+
   };
   // var uuid = "00000009-0000-3512-2118-0009af100700";
   var options = { acceptAllDevices: true, optionalServices: ["heart_rate"] };
@@ -31,18 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
       var device = await navigator.bluetooth.requestDevice(options);
       var server = await device.gatt.connect();
       var service = await server.getPrimaryService("heart_rate");
-      var characteristic = await service.getCharacteristic(
-        "heart_rate_measurement"
-      );
-    //   console.log(characteristic);
-    //   feedback("Characteristic retrieved");
+      var characteristic = await service.getCharacteristic("heart_rate_measurement");
       await characteristic.startNotifications();
-      characteristic.addEventListener(
-        "characteristicvaluechanged",
-        handleChange
-      );
+      characteristic.addEventListener("characteristicvaluechanged",handleChange);
     } catch (e) {
-      feedback(e);
       console.log(e);
     }
   });
