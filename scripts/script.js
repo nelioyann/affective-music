@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let uri = `https://api.getsongbpm.com/tempo/?${params.toString()}`
     let headers = new Headers();
-    // headers.append("X-API-KEY", API_KEY)
+    headers.append("Content-Type", "application/json")
     let request = new Request(uri, {
       method: "GET",
       headers: headers,
