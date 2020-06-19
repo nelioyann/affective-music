@@ -25,9 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // alert('will it work')
 		// const url = `https://api.getsongbpm.com/tempo/?${params.toString()}`;
 		let response = await fetch(request);
-    // let json = await response.json();
+    let json = await response.json();
     // alert("it worked")
-		console.log(response);
+		console.log(json);
 	}
   
 	getSongs(50)
