@@ -4,21 +4,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 	const getSongs = async (bpm) => {
+    let API_KEY = "2d1f0b47e83725b74f4334664ffedabd";
 		const params = new URLSearchParams({
-			origin: "*",
-		  api_key: "2d1f0b47e83725b74f4334664ffedabd",
+      api_key: API_KEY,
 		  bpm: bpm,
-
     });
-    alert('will it work')
-		const url = `https://api.getsongbpm.com/tempo/?${params.toString()}`;
-		let response = await fetch(url);
-    let json = await response.json();
-    alert("it worked")
-		console.log(json);
+
+    // FETCH
+
+    let uri = `https://api.getsongbpm.com/tempo/?${params.toString()}`
+    let headers = new Headers();
+    headers.append("X-API-KEY", API_KEY)
+    let request = new Request(uri, {
+      method: "GET",
+      headers: headers,
+      mode: "cors"
+    })
+
+    // alert('will it work')
+		// const url = `https://api.getsongbpm.com/tempo/?${params.toString()}`;
+		let response = await fetch(request);
+    // let json = await response.json();
+    // alert("it worked")
+		console.log(response);
 	}
   
-	
+	getSongs(50)
   const handleChange = (event) => {
     let value = event.target.value;
     var a = [];
@@ -27,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     value = a.join(" ").slice(-4);
     hr_value.innerHTML = `${parseInt(value)}`;
-    getSongs(50)
+    
 
   };
   // var uuid = "00000009-0000-3512-2118-0009af100700";
