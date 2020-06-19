@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 	const getSongs = async (bpm) => {
-    let API_KEY = "2d1f0b47e83725b74f4334664ffedabd";
+    // let API_KEY = "2d1f0b47e83725b74f4334664ffedabd";
+    let API_KEY = "16f6d8f2b86798778aaf93c3eee3236c"
 		const params = new URLSearchParams({
       api_key: API_KEY,
 		  bpm: bpm,
@@ -14,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let uri = `https://api.getsongbpm.com/tempo/?${params.toString()}`
     let headers = new Headers();
-    headers.append("X-API-KEY", API_KEY)
+    // headers.append("X-API-KEY", API_KEY)
     let request = new Request(uri, {
       method: "GET",
       headers: headers,
