@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let uri = `https://api.getsongbpm.com/tempo/?${params.toString()}`
     let headers = new Headers();
     headers.append("Content-Type", "application/json")
+    headers.append("Origin", "https://affectivemusic.tk")
     let request = new Request(uri, {
       method: "GET",
       headers: headers,
@@ -30,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		console.log(json);
 	}
   
-	getSongs(50)
+	// getSongs(50)
   const handleChange = (event) => {
     let value = event.target.value;
     var a = [];
@@ -54,7 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
       await characteristic.startNotifications();
       characteristic.addEventListener("characteristicvaluechanged",handleChange);
     } catch (e) {
-      console.log(e);
+      alert(e)
+      // console.log(e);
     }
   });
 });
