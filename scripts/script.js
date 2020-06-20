@@ -2,22 +2,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	const hr_value = document.querySelector(".measures__bpm__value");
 
-
-	const getSongs = async (bpm) => {
-    // let API_KEY = "2d1f0b47e83725b74f4334664ffedabd";
-    let API_KEY = "16f6d8f2b86798778aaf93c3eee3236c"
-		const params = new URLSearchParams({
-      api_key: API_KEY,
-		  bpm: bpm,
-    });
-
-    // FETCH
-
-    let uri = `https://api.getsongbpm.com/tempo/?${params.toString()}`
+  const getToken = async () =>{
+    let username = "";
+    let password = ""
+    let token__uri = `https://www.bpmdatabase.com/api/auth/token/`
+    let verify_uri = "https://www.bpmdatabase.com/api/auth/token/verify/"
     let headers = new Headers();
     headers.append("Content-Type", "application/json")
-    headers.append("Origin", "https://affectivemusic.tk")
-    let request = new Request(uri, {
+    let body = {username, password}
+    let request = new Request(token__uri, {
+      method: "POST",
+      headers: headers,
+      mode: "cors",
+      body: JSON.stringify(body)
+    })
+    let response = await fetch(request);
+    let json = await response.json();
+    console.log(json)
+    let token = json.token
+    // console.log(token)
+    //   let vresponse = await fetch(verify_uri, {
+    //     method: "POST",
+    //     headers: headers,
+    //     body: JSON.stringify({token, password, username})
+    //   })
+    //   let vjson = await vresponse.json()
+    //   console.log(vjson)
+
+    // getSongs(45, token)
+  }
+
+    // getToken()
+	const getSongs = async (bpm, token) => {
+	
+
+    // FETCH
+    let bpm__uri = `https://www.bpmdatabase.com/api/tracks/?bpm=${bpm}`
+    let headers = new Headers();
+    headers.append("Content-Type", "application/json")
+    headers.append("X-CSRFToken", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9")
+    
+
+    let request = new Request(bpm__uri, {
       method: "GET",
       headers: headers,
       mode: "cors"
@@ -26,9 +52,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // alert('will it work')
 		// const url = `https://api.getsongbpm.com/tempo/?${params.toString()}`;
 		let response = await fetch(request);
-    let json = await response.json();
+    // let json = await response.json();
     // alert("it worked")
-		console.log(json);
+		console.log(response);
 	}
   
 	// getSongs(50)
