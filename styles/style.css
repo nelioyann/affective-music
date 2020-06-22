@@ -6,7 +6,7 @@
 
 @media screen and (min-width: 320px) {
   :root {
-    font-size: 13px;
+    font-size: 15px;
   }
 }
 
@@ -43,18 +43,6 @@ body {
   background-color: rgba(74, 80, 109, 0.9);
   /* color: $color_dark;
   background-color: $color_light; */
-}
-
-.site_wrapper::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  background-image: url("../images/zenrocks.jpg");
-  background-size: cover;
-  height: 100vh;
-  width: 100vw;
-  z-index: -2;
 }
 
 main {
@@ -96,7 +84,7 @@ main {
 
 .measures__bpm__value {
   font-size: 6em;
-  color: #ea1a4d;
+  color: #e4446c;
   font-family: "Montserrat Alternates", sans-serif;
 }
 
@@ -105,7 +93,7 @@ main {
 }
 
 .measures__heart {
-  background-color: #ea1a4d;
+  background-color: #e4446c;
   cursor: pointer;
   width: 5em;
   height: 5em;
@@ -234,31 +222,31 @@ main {
 
 @-webkit-keyframes pulse {
   0% {
-    -webkit-box-shadow: 0 0 0 0 rgba(234, 26, 77, 0.6);
-            box-shadow: 0 0 0 0 rgba(234, 26, 77, 0.6);
+    -webkit-box-shadow: 0 0 0 0 rgba(228, 68, 108, 0.6);
+            box-shadow: 0 0 0 0 rgba(228, 68, 108, 0.6);
   }
   70% {
-    -webkit-box-shadow: 0 0 0 3em rgba(234, 26, 77, 0);
-            box-shadow: 0 0 0 3em rgba(234, 26, 77, 0);
+    -webkit-box-shadow: 0 0 0 3em rgba(228, 68, 108, 0);
+            box-shadow: 0 0 0 3em rgba(228, 68, 108, 0);
   }
   100% {
-    -webkit-box-shadow: 0 0 0 0 rgba(234, 26, 77, 0);
-            box-shadow: 0 0 0 0 rgba(234, 26, 77, 0);
+    -webkit-box-shadow: 0 0 0 0 rgba(228, 68, 108, 0);
+            box-shadow: 0 0 0 0 rgba(228, 68, 108, 0);
   }
 }
 
 @keyframes pulse {
   0% {
-    -webkit-box-shadow: 0 0 0 0 rgba(234, 26, 77, 0.6);
-            box-shadow: 0 0 0 0 rgba(234, 26, 77, 0.6);
+    -webkit-box-shadow: 0 0 0 0 rgba(228, 68, 108, 0.6);
+            box-shadow: 0 0 0 0 rgba(228, 68, 108, 0.6);
   }
   70% {
-    -webkit-box-shadow: 0 0 0 3em rgba(234, 26, 77, 0);
-            box-shadow: 0 0 0 3em rgba(234, 26, 77, 0);
+    -webkit-box-shadow: 0 0 0 3em rgba(228, 68, 108, 0);
+            box-shadow: 0 0 0 3em rgba(228, 68, 108, 0);
   }
   100% {
-    -webkit-box-shadow: 0 0 0 0 rgba(234, 26, 77, 0);
-            box-shadow: 0 0 0 0 rgba(234, 26, 77, 0);
+    -webkit-box-shadow: 0 0 0 0 rgba(228, 68, 108, 0);
+            box-shadow: 0 0 0 0 rgba(228, 68, 108, 0);
   }
 }
 /*# sourceMappingURL=style.css.map */
