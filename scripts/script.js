@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const trigger = document.querySelector(".measures__heart");
 	const tracklist = document.querySelector(".player__tracklist");
 
+
 	var sound = new Howl({
 		src: ["china-white.mp3"],
 		autoplay: true,
@@ -13,9 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	console.log(sound);
 
 	const playTrack = (url) => {
-		// if (url == sound._src) return;
 		Howler.unload();
-		// sound._src =
 		var sound = new Howl({
 			src: [url],
 			autoplay: true,
@@ -27,16 +26,17 @@ document.addEventListener("DOMContentLoaded", () => {
 	};
 	// playTrack();
 	// sound.src.append("astronomia.mp3")
+
 	const Player = function (tempo) {
 		this.tempo = tempo;
 		this.low_tempo = Math.floor(tempo / 10) * 10;
 		this.high_tempo = Math.ceil(tempo / 10) * 10;
-		this.tracks = [];
+		this.tracks = []; // retrieve tracklist from tempo scope
 
-		this.showTracks = () => {
+		this.showTracksUI = () => {
 			tracklist.innerHTML = "";
 			this.tracks.forEach((track) => {
-				tracklist.innerHTML += `<li>${track.track}</li>`;
+				tracklist.innerHTML += `<li class="player__tracklist__sample">${track.track}</li>`;
 				
 			});
 		};
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		// Update the player tracks
 		player.tracks = json.tracks;
 		console.log('player tracks', player.tracks)
-		player.showTracks();
+		player.showTracksUI();
 		// getTrackSample(player.tracks[0].track);
 
 		// console.log(player.tracks);
@@ -69,8 +69,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		for (var i = 0; i < value.byteLength; i++) {
 			a.push("0x" + ("00" + value.getUint8(i).toString(16)).slice(-2));
 		}
-		value = parseInt(a.join(" ").slice(-4));
-		hr_value.innerHTML = value;
+		let currentBpm = parseInt(a.join(" ").slice(-4));
+		hr_value.innerHTML = currentBpm;
+		player.tempo = currentBpm;
 		// switchTracks(player, value);
 	};
 
@@ -100,6 +101,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			console.log(e);
 		}
 	}
+
+	
 	trigger.addEventListener("click", connect_miband);
 
 	// Testing

@@ -10,7 +10,7 @@
 
 
 
-$color_dark: #4a506d;
+$color_dark: #181818;
 $color_light: #e2d6d6;
 $color_primary: #e4446c;
 $font_headings: "Montserrat Alternates", sans-serif;
@@ -39,30 +39,33 @@ $size_desktop: 1024px;
 body {
   margin: 0;
   padding: 0;
+  background-color: $color_dark;
 }
 
 .site_wrapper {
+  min-width: 270px;
   width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
   padding: 1em;
   overflow: hidden;
   min-height: 100vh;
   font-family: $font_body;
   color: $color_light;
   position: relative;
-  background-color: rgba($color_dark, 0.9);
+  
   /* color: $color_dark;
   background-color: $color_light; */
 }
 
 
 main {
-  min-width: 270px;
-  width: 100%;
+  
   margin: auto;
 }
 
 .header {
-  display: none;
+  // display: none;
   &__heading {
     font-family: $font_headings;
   }
@@ -124,6 +127,18 @@ main {
   }
 }
 
+.player{
+  &__tracklist{
+  list-style-type: none;
+  margin: 0; padding: 0;
+  &__sample{
+    background-color: $color_light;
+    color: $color_dark;
+    padding: 1em;
+    font-weight: bold;
+  }
+  }
+}
 .connection {
   background-color: $color_dark;
   &__button {
