@@ -39,7 +39,7 @@ $size_desktop: 1024px;
 body {
   margin: 0;
   padding: 0;
-  background-color: $color_dark;
+  background-color: $color_light;
 }
 
 .site_wrapper {
@@ -51,7 +51,7 @@ body {
   overflow: hidden;
   min-height: 100vh;
   font-family: $font_body;
-  color: $color_light;
+  color: $color_dark;
   position: relative;
   
   /* color: $color_dark;
@@ -67,6 +67,10 @@ main {
 .header {
   // display: none;
   &__heading {
+    font-family: $font_headings;
+  }
+  &__tagline {
+    line-height:2;
     font-family: $font_headings;
   }
 }
@@ -132,10 +136,12 @@ main {
   list-style-type: none;
   margin: 0; padding: 0;
   &__sample{
-    background-color: $color_light;
-    color: $color_dark;
+    // background-color: $color_light;
+    // color: $color_dark;
     padding: 1em;
-    font-weight: bold;
+    margin: 0.5em;
+    // font-weight: bold;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
   }
   }
 }

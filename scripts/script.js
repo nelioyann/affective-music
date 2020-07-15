@@ -4,62 +4,16 @@ document.addEventListener("DOMContentLoaded", () => {
 	const trigger = document.querySelector(".measures__heart");
 	const tracklist = document.querySelector(".player__tracklist");
 
-
+	const local_samples = ["../songs/bensound-cute.mp3", "../songs/bensound-elevate.mp3", "../songs/bensound-summer.mp3", "../songs/bensound-ukelele.mp3"];
 	var sound = new Howl({
-		src: ["china-white.mp3"],
+		src: ["../songs/bensound-cute.mp3"],
 		autoplay: true,
 		loop: true,
-		volume: 0.5,
+		volume: 0.3,
 	});
-	console.log(sound);
+	sound.rate(1.5)
+	// console.log(sound);
 
-	const playTrack = (url) => {
-		Howler.unload();
-		var sound = new Howl({
-			src: [url],
-			autoplay: true,
-			loop: true,
-			volume: 0.5,
-		});
-		sound.load();
-		console.log(sound);
-	};
-	// playTrack();
-	// sound.src.append("astronomia.mp3")
-
-	const Player = function (tempo) {
-		this.tempo = tempo;
-		this.low_tempo = Math.floor(tempo / 10) * 10;
-		this.high_tempo = Math.ceil(tempo / 10) * 10;
-		this.tracks = []; // retrieve tracklist from tempo scope
-
-		this.showTracksUI = () => {
-			tracklist.innerHTML = "";
-			this.tracks.forEach((track) => {
-				tracklist.innerHTML += `<li class="player__tracklist__sample">${track.track}</li>`;
-				
-			});
-		};
-	};
-
-	const switchTracks = async (player, tempo) => {
-		// Change interval tempo value if outside scope
-		if (tempo < player.low_tempo || tempo > player.high_tempo) {
-			console.log("changing the tempo to", tempo);
-			player = new Player(tempo);
-			playTrack(player.songUrl)
-			console.log(player.tracks)
-			// console.log(player.low_tempo)
-		}
-
-		// Update the player tracks
-		player.tracks = json.tracks;
-		console.log('player tracks', player.tracks)
-		player.showTracksUI();
-		// getTrackSample(player.tracks[0].track);
-
-		// console.log(player.tracks);
-	};
 
 	
 
@@ -71,8 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 		let currentBpm = parseInt(a.join(" ").slice(-4));
 		hr_value.innerHTML = currentBpm;
-		player.tempo = currentBpm;
-		// switchTracks(player, value);
 	};
 
 	const connect_miband = async () => {
@@ -107,7 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	// Testing
 
-	const player = new Player(67);
 
 
 });
