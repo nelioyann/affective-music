@@ -5,18 +5,26 @@ document.addEventListener("DOMContentLoaded", () => {
 	const tracklist = document.querySelector(".player__tracklist");
 
 	const local_samples = ["../songs/bensound-cute.mp3", "../songs/bensound-elevate.mp3", "../songs/bensound-summer.mp3", "../songs/bensound-ukelele.mp3"];
+	let volume = 0.3
 	var sound = new Howl({
-		src: ["../songs/bensound-cute.mp3"],
-		autoplay: true,
-		loop: true,
-		volume: 0.3,
+		src: local_samples,
+		autoplay: false,
+		loop: false,
+		volume,
 	});
-	sound.rate(1.5)
+	sound.rate(1)
+	sound.play()
 	// console.log(sound);
 
+	const test = () =>{
+		// sound.on('fade', sound.fade(0, volume, 3000))
+		sound.fade(volume, 0, 3000)
+		// sound.rate(1.04)
+		// sound.fade(0, volume, 3000)
+	}
+	// setTimeout(test, 9000)
 
 	
-
 	const handleHeartbeatChange = (event) => {
 		let value = event.target.value;
 		var a = [];
@@ -24,7 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			a.push("0x" + ("00" + value.getUint8(i).toString(16)).slice(-2));
 		}
 		let currentBpm = parseInt(a.join(" ").slice(-4));
-		hr_value.innerHTML = currentBpm;
+		hr_value.innerHTML = 1 + currentBpm / 100;
+		sound.rate(1 + currentBpm / 100)
 	};
 
 	const connect_miband = async () => {
