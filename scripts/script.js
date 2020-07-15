@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 		let currentBpm = parseInt(a.join(" ").slice(-4));
 		hr_value.innerHTML = currentBpm;
-		let speed = 1 + currentBpm / 100;
+		let speed = 0.5 + currentBpm / 100;
 		document.querySelector(".speed").innerHTML = speed.toFixed(2);
 		sound.rate(speed.toFixed(2));
 	};
