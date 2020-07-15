@@ -5,16 +5,16 @@ document.addEventListener("DOMContentLoaded", () => {
 	const tracklist = document.querySelector(".player__tracklist");
 
 	const local_samples = [
+		"../songs/bensound-summer.mp3",
 		"../songs/bensound-elevate.mp3",
 		"../songs/bensound-cute.mp3",
-		"../songs/bensound-summer.mp3",
 		"../songs/bensound-ukelele.mp3",
 	];
 	let volume = 0.3;
 	var sound = new Howl({
 		src: local_samples,
 		autoplay: false,
-		loop: false,
+		loop: true,
 		volume,
 	});
 	sound.rate(1);
