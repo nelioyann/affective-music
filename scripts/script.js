@@ -4,27 +4,30 @@ document.addEventListener("DOMContentLoaded", () => {
 	const trigger = document.querySelector(".measures__heart");
 	const tracklist = document.querySelector(".player__tracklist");
 
-	const local_samples = ["../songs/bensound-cute.mp3", "../songs/bensound-elevate.mp3", "../songs/bensound-summer.mp3", "../songs/bensound-ukelele.mp3"];
-	let volume = 0.3
+	const local_samples = [
+		"../songs/bensound-elevate.mp3",
+		"../songs/bensound-cute.mp3",
+		"../songs/bensound-summer.mp3",
+		"../songs/bensound-ukelele.mp3",
+	];
+	let volume = 0.3;
 	var sound = new Howl({
 		src: local_samples,
 		autoplay: false,
 		loop: false,
 		volume,
 	});
-	sound.rate(1)
-	sound.play()
+	sound.rate(1);
 	// console.log(sound);
 
-	const test = () =>{
+	const test = () => {
 		// sound.on('fade', sound.fade(0, volume, 3000))
-		sound.fade(volume, 0, 3000)
+		sound.fade(volume, 0, 3000);
 		// sound.rate(1.04)
 		// sound.fade(0, volume, 3000)
-	}
+	};
 	// setTimeout(test, 9000)
 
-	
 	const handleHeartbeatChange = (event) => {
 		let value = event.target.value;
 		var a = [];
@@ -32,8 +35,10 @@ document.addEventListener("DOMContentLoaded", () => {
 			a.push("0x" + ("00" + value.getUint8(i).toString(16)).slice(-2));
 		}
 		let currentBpm = parseInt(a.join(" ").slice(-4));
-		hr_value.innerHTML = 1 + currentBpm / 100;
-		sound.rate(1 + currentBpm / 100)
+		hr_value.innerHTML = currentBpm;
+		let speed = 1 + currentBpm / 100;
+		document.querySelector(".speed").innerHTML = speed.toFixed(2);
+		sound.rate(speed.toFixed(2));
 	};
 
 	const connect_miband = async () => {
@@ -54,6 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			);
 			await characteristic.startNotifications();
 			console.log("Notif started");
+			sound.play();
+
 			characteristic.addEventListener(
 				"characteristicvaluechanged",
 				handleHeartbeatChange
@@ -61,13 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		} catch (e) {
 			console.log(e);
 		}
-	}
+	};
 
-	
 	trigger.addEventListener("click", connect_miband);
 
 	// Testing
-
-
-
 });
