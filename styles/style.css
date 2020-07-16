@@ -12,13 +12,13 @@
 
 @media screen and (min-width: 768px) {
   :root {
-    font-size: 19px;
+    font-size: 17px;
   }
 }
 
 @media screen and (min-width: 1024px) {
   :root {
-    font-size: 23px;
+    font-size: 20px;
   }
 }
 
@@ -30,13 +30,17 @@
 body {
   margin: 0;
   padding: 0;
+  border: 1px solid #e4446c;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  overflow: hidden;
   background-color: #e2d6d6;
 }
 
 .site_wrapper {
   min-width: 270px;
   width: 100%;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 1em;
   overflow: hidden;
@@ -54,6 +58,7 @@ main {
 
 .header__heading {
   font-family: "Montserrat Alternates", sans-serif;
+  text-align: center;
 }
 
 .header__tagline {
@@ -85,7 +90,7 @@ main {
 }
 
 .measures__bpm__value {
-  font-size: 6em;
+  font-size: 3em;
   color: #e4446c;
   font-family: "Montserrat Alternates", sans-serif;
 }
@@ -97,8 +102,8 @@ main {
 .measures__heart {
   background-color: #e4446c;
   cursor: pointer;
-  width: 5em;
-  height: 5em;
+  width: clamp(20px, 5em, 100px);
+  height: clamp(20px, 5em, 100px);
   border-radius: 50%;
   padding: 1em;
   -webkit-animation: pulse;

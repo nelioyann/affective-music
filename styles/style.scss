@@ -25,10 +25,10 @@ $size_desktop: 1024px;
     font-size: 15px;
   }
   @include minq($size_tablet) {
-    font-size: 19px;
+    font-size: 17px;
   }
   @include minq($size_desktop) {
-    font-size: 23px;
+    font-size: 20px;
   }
 }
 
@@ -39,13 +39,16 @@ $size_desktop: 1024px;
 body {
   margin: 0;
   padding: 0;
+  border: 1px solid $color_primary;
+  box-sizing: border-box;
+  overflow: hidden;
   background-color: $color_light;
 }
 
 .site_wrapper {
   min-width: 270px;
   width: 100%;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 1em;
   overflow: hidden;
@@ -68,6 +71,7 @@ main {
   // display: none;
   &__heading {
     font-family: $font_headings;
+    text-align: center;
   }
   &__tagline {
     line-height:2;
@@ -89,7 +93,7 @@ main {
     align-items: baseline;
     
     &__value{
-      font-size: 6em;
+      font-size: 3em;
       color: $color_primary;
       font-family: $font_headings;
       // margin-top: auto;
@@ -102,8 +106,8 @@ main {
   &__heart {
     background-color: $color_primary;
     cursor: pointer;
-    width: 5em;
-    height: 5em;
+    width: clamp(20px, 5em, 100px);
+    height: clamp(20px, 5em, 100px);
     border-radius: 50%;
     padding: 1em;
     animation: pulse;
