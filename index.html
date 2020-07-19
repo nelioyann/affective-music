@@ -23,8 +23,10 @@
 <body>
     <div class="site_wrapper">
         <header class="header">
-            <h1 class="header__heading">Affective Music</h1>
-            <!-- <p class="header__tagline">The music adapts to the beat of your heart</p> -->
+            <h1 class="header__heading">Heart Orchestra</h1>
+            <p class="header__tagline">Tired of listening to songs that do not follow your activity ? 
+                Connect your Mi Band and let your heart become a <em>Chef d'Orchestre</em> while you sleep 💤, rest 🧘 or run 🏃‍♂️.
+            </p>
         </header>
         <main>
             <div class="measures">
@@ -43,7 +45,18 @@
                 <!-- <div class="measures__slider"></div> -->
             </div>
 
-            <div class="player"></div>
+            <div class="player">
+                <div class="speed"></div>
+                <div class="player__controls">
+                    <div class="player__controls__button"></div>
+                </div>
+                <ol class="player__tracklist">
+                    <li class="player__tracklist__sample">1. Morceaux</li>
+                    <!-- <li class="player__tracklist__sample">2. Cute</li>
+                    <li class="player__tracklist__sample">3. Morceaux</li>
+                    <li class="player__tracklist__sample">4. Morceaux</li> -->
+                </ol>
+            </div>
 
            
         </main>
@@ -52,8 +65,7 @@
         </footer>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"
-        integrity="sha256-Tp/HPdYebMPmgPDCAs8Et4j+VUKuOWmAZdhegRS4O4g=" crossorigin="anonymous"></script>
+    <script src="./scripts/howler.min.js"></script>
     <script src="./scripts/script.js"></script>
 
 </body>

@@ -10,9 +10,9 @@
 
 
 
-$color_dark: #4a506d;
+$color_dark: #181818;
 $color_light: #e2d6d6;
-$color_primary: #ea1a4d;
+$color_primary: #e4446c;
 $font_headings: "Montserrat Alternates", sans-serif;
 $font_body: "Nunito", sans-serif;
 $size_mobile: 320px;
@@ -22,14 +22,13 @@ $size_desktop: 1024px;
 :root {
   font-size: 15px;
   @include minq($size_mobile) {
-    font-size: 13px;
+    font-size: 15px;
   }
-
   @include minq($size_tablet) {
-    font-size: 19px;
+    font-size: 17px;
   }
   @include minq($size_desktop) {
-    font-size: 23px;
+    font-size: 20px;
   }
 }
 
@@ -40,42 +39,42 @@ $size_desktop: 1024px;
 body {
   margin: 0;
   padding: 0;
+  border: 2px solid $color_primary;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: $color_light;
 }
 
 .site_wrapper {
+  min-width: 270px;
   width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
   padding: 1em;
   overflow: hidden;
   min-height: 100vh;
   font-family: $font_body;
-  color: $color_light;
+  color: $color_dark;
   position: relative;
-  background-color: rgba($color_dark, 0.9);
+  
   /* color: $color_dark;
   background-color: $color_light; */
 }
 
-.site_wrapper::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  background-image: url("../images/zenrocks.jpg");
-  background-size: cover;
-  height: 100vh;
-  width: 100vw;
-  z-index: -2;
-}
 
 main {
-  min-width: 270px;
-  width: 100%;
+  
   margin: auto;
 }
 
 .header {
-  display: none;
+  // display: none;
   &__heading {
+    font-family: $font_headings;
+    text-align: center;
+  }
+  &__tagline {
+    line-height:2;
     font-family: $font_headings;
   }
 }
@@ -94,7 +93,7 @@ main {
     align-items: baseline;
     
     &__value{
-      font-size: 6em;
+      font-size: 3em;
       color: $color_primary;
       font-family: $font_headings;
       // margin-top: auto;
@@ -107,8 +106,8 @@ main {
   &__heart {
     background-color: $color_primary;
     cursor: pointer;
-    width: 5em;
-    height: 5em;
+    width: clamp(20px, 5em, 100px);
+    height: clamp(20px, 5em, 100px);
     border-radius: 50%;
     padding: 1em;
     animation: pulse;
@@ -136,6 +135,20 @@ main {
   }
 }
 
+.player{
+  &__tracklist{
+  list-style-type: none;
+  margin: 0; padding: 0;
+  &__sample{
+    // background-color: $color_light;
+    // color: $color_dark;
+    padding: 1em;
+    margin: 0.5em;
+    // font-weight: bold;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  }
+  }
+}
 .connection {
   background-color: $color_dark;
   &__button {

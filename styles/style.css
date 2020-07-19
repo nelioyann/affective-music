@@ -6,19 +6,19 @@
 
 @media screen and (min-width: 320px) {
   :root {
-    font-size: 13px;
+    font-size: 15px;
   }
 }
 
 @media screen and (min-width: 768px) {
   :root {
-    font-size: 19px;
+    font-size: 17px;
   }
 }
 
 @media screen and (min-width: 1024px) {
   :root {
-    font-size: 23px;
+    font-size: 20px;
   }
 }
 
@@ -30,44 +30,39 @@
 body {
   margin: 0;
   padding: 0;
+  border: 2px solid #e4446c;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  overflow: hidden;
+  background-color: #e2d6d6;
 }
 
 .site_wrapper {
+  min-width: 270px;
   width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
   padding: 1em;
   overflow: hidden;
   min-height: 100vh;
   font-family: "Nunito", sans-serif;
-  color: #e2d6d6;
+  color: #181818;
   position: relative;
-  background-color: rgba(74, 80, 109, 0.9);
   /* color: $color_dark;
   background-color: $color_light; */
 }
 
-.site_wrapper::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  background-image: url("../images/zenrocks.jpg");
-  background-size: cover;
-  height: 100vh;
-  width: 100vw;
-  z-index: -2;
-}
-
 main {
-  min-width: 270px;
-  width: 100%;
   margin: auto;
 }
 
-.header {
-  display: none;
+.header__heading {
+  font-family: "Montserrat Alternates", sans-serif;
+  text-align: center;
 }
 
-.header__heading {
+.header__tagline {
+  line-height: 2;
   font-family: "Montserrat Alternates", sans-serif;
 }
 
@@ -95,8 +90,8 @@ main {
 }
 
 .measures__bpm__value {
-  font-size: 6em;
-  color: #ea1a4d;
+  font-size: 3em;
+  color: #e4446c;
   font-family: "Montserrat Alternates", sans-serif;
 }
 
@@ -105,10 +100,10 @@ main {
 }
 
 .measures__heart {
-  background-color: #ea1a4d;
+  background-color: #e4446c;
   cursor: pointer;
-  width: 5em;
-  height: 5em;
+  width: clamp(20px, 5em, 100px);
+  height: clamp(20px, 5em, 100px);
   border-radius: 50%;
   padding: 1em;
   -webkit-animation: pulse;
@@ -152,8 +147,21 @@ main {
   display: block;
 }
 
+.player__tracklist {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.player__tracklist__sample {
+  padding: 1em;
+  margin: 0.5em;
+  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+          box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
 .connection {
-  background-color: #4a506d;
+  background-color: #181818;
 }
 
 .connection__button {
@@ -172,7 +180,7 @@ main {
   border-radius: 1em;
   -webkit-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.219);
           box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.219);
-  color: #4a506d;
+  color: #181818;
   line-height: 2;
   width: 100%;
   padding: 5px;
@@ -234,31 +242,31 @@ main {
 
 @-webkit-keyframes pulse {
   0% {
-    -webkit-box-shadow: 0 0 0 0 rgba(234, 26, 77, 0.6);
-            box-shadow: 0 0 0 0 rgba(234, 26, 77, 0.6);
+    -webkit-box-shadow: 0 0 0 0 rgba(228, 68, 108, 0.6);
+            box-shadow: 0 0 0 0 rgba(228, 68, 108, 0.6);
   }
   70% {
-    -webkit-box-shadow: 0 0 0 3em rgba(234, 26, 77, 0);
-            box-shadow: 0 0 0 3em rgba(234, 26, 77, 0);
+    -webkit-box-shadow: 0 0 0 3em rgba(228, 68, 108, 0);
+            box-shadow: 0 0 0 3em rgba(228, 68, 108, 0);
   }
   100% {
-    -webkit-box-shadow: 0 0 0 0 rgba(234, 26, 77, 0);
-            box-shadow: 0 0 0 0 rgba(234, 26, 77, 0);
+    -webkit-box-shadow: 0 0 0 0 rgba(228, 68, 108, 0);
+            box-shadow: 0 0 0 0 rgba(228, 68, 108, 0);
   }
 }
 
 @keyframes pulse {
   0% {
-    -webkit-box-shadow: 0 0 0 0 rgba(234, 26, 77, 0.6);
-            box-shadow: 0 0 0 0 rgba(234, 26, 77, 0.6);
+    -webkit-box-shadow: 0 0 0 0 rgba(228, 68, 108, 0.6);
+            box-shadow: 0 0 0 0 rgba(228, 68, 108, 0.6);
   }
   70% {
-    -webkit-box-shadow: 0 0 0 3em rgba(234, 26, 77, 0);
-            box-shadow: 0 0 0 3em rgba(234, 26, 77, 0);
+    -webkit-box-shadow: 0 0 0 3em rgba(228, 68, 108, 0);
+            box-shadow: 0 0 0 3em rgba(228, 68, 108, 0);
   }
   100% {
-    -webkit-box-shadow: 0 0 0 0 rgba(234, 26, 77, 0);
-            box-shadow: 0 0 0 0 rgba(234, 26, 77, 0);
+    -webkit-box-shadow: 0 0 0 0 rgba(228, 68, 108, 0);
+            box-shadow: 0 0 0 0 rgba(228, 68, 108, 0);
   }
 }
 /*# sourceMappingURL=style.css.map */
