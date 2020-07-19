@@ -1,4 +1,4 @@
-# Affective Music
+# Heart Rate based music
 
 Affective Music is an application that synchronize the music your hear to your heart beat.
 
