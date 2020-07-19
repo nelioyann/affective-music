@@ -6,19 +6,19 @@
 
 @media screen and (min-width: 320px) {
   :root {
-    font-size: 15px;
+    font-size: 21px;
   }
 }
 
 @media screen and (min-width: 768px) {
   :root {
-    font-size: 17px;
+    font-size: 20px;
   }
 }
 
 @media screen and (min-width: 1024px) {
   :root {
-    font-size: 20px;
+    font-size: 22px;
   }
 }
 
@@ -42,7 +42,7 @@ body {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  padding: 1em;
+  padding: 0 1em;
   overflow: hidden;
   min-height: 100vh;
   font-family: "Nunito", sans-serif;
@@ -63,11 +63,10 @@ main {
 
 .header__tagline {
   line-height: 2;
-  font-family: "Montserrat Alternates", sans-serif;
+  font-family: "Nunito", sans-serif;
 }
 
 .measures {
-  height: 40vh;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -135,6 +134,8 @@ main {
           animation: heartbeat;
   -webkit-animation-duration: 2s;
           animation-duration: 2s;
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
 }
@@ -147,14 +148,26 @@ main {
   display: block;
 }
 
+.player {
+  margin-top: 4em;
+}
+
 .player__tracklist {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .player__tracklist__sample {
-  padding: 1em;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 0.5em;
   margin: 0.5em;
   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
           box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
@@ -246,8 +259,8 @@ main {
             box-shadow: 0 0 0 0 rgba(228, 68, 108, 0.6);
   }
   70% {
-    -webkit-box-shadow: 0 0 0 3em rgba(228, 68, 108, 0);
-            box-shadow: 0 0 0 3em rgba(228, 68, 108, 0);
+    -webkit-box-shadow: 0 0 0 2em rgba(228, 68, 108, 0);
+            box-shadow: 0 0 0 2em rgba(228, 68, 108, 0);
   }
   100% {
     -webkit-box-shadow: 0 0 0 0 rgba(228, 68, 108, 0);
@@ -261,8 +274,8 @@ main {
             box-shadow: 0 0 0 0 rgba(228, 68, 108, 0.6);
   }
   70% {
-    -webkit-box-shadow: 0 0 0 3em rgba(228, 68, 108, 0);
-            box-shadow: 0 0 0 3em rgba(228, 68, 108, 0);
+    -webkit-box-shadow: 0 0 0 2em rgba(228, 68, 108, 0);
+            box-shadow: 0 0 0 2em rgba(228, 68, 108, 0);
   }
   100% {
     -webkit-box-shadow: 0 0 0 0 rgba(228, 68, 108, 0);

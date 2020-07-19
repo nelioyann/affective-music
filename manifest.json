@@ -1,6 +1,6 @@
 {
-  "name": "To your HeartBeat",
-  "short_name": "HeartBeat",
+  "name": "HeartRate Based Music",
+  "short_name": "HRBM",
   "theme_color": "#f32121",
   "background_color": "#ffffff",
   "display": "standalone",

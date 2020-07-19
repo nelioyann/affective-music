@@ -23,10 +23,8 @@
 <body>
     <div class="site_wrapper">
         <header class="header">
-            <h1 class="header__heading">Heart Orchestra</h1>
-            <p class="header__tagline">Tired of listening to songs that do not follow your activity ? 
-                Connect your Mi Band and let your heart become a <em>Chef d'Orchestre</em> while you sleep 💤, rest 🧘 or run 🏃‍♂️.
-            </p>
+            <h1 class="header__heading">Heart Rate Based Music</h1>
+            <p class="header__tagline"> Your heart rate determines the speed of the music. Click on the heart to pair your Mi Band 4</p>
         </header>
         <main>
             <div class="measures">
@@ -39,7 +37,7 @@
                     </svg>
                 </div>
                 <div class="measures__bpm">
-                    <div class="measures__bpm__value">67</div>
+                    <div class="measures__bpm__value">0</div>
                     <div class="measures__bpm__label">BPM</div>
                 </div>
                 <!-- <div class="measures__slider"></div> -->
@@ -50,23 +48,23 @@
                 <div class="player__controls">
                     <div class="player__controls__button"></div>
                 </div>
-                <ol class="player__tracklist">
-                    <li class="player__tracklist__sample">1. Morceaux</li>
-                    <!-- <li class="player__tracklist__sample">2. Cute</li>
-                    <li class="player__tracklist__sample">3. Morceaux</li>
-                    <li class="player__tracklist__sample">4. Morceaux</li> -->
-                </ol>
+                <h2>Select a song</h2>
+                <ul class="player__tracklist">
+                    <li class="player__tracklist__sample">1. Summer</li>
+                    <li class="player__tracklist__sample">2. Cute</li>
+                    <li class="player__tracklist__sample">3. Elevate</li>
+                    <li class="player__tracklist__sample">4. Ukulele</li>
+                </ul>
             </div>
 
            
         </main>
-        <footer>
-
-        </footer>
+        
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.1/gsap.min.js" integrity="sha512-FOw+bgWRx/Kk1SAVkNO8CiXx9FFP7kFq+hcYWruJRdqjhzB39Yt/CVFgcFIXfTH0+oSZNUMEQNq1XI9+nMAW0Q==" crossorigin="anonymous"></script>
     <script src="./scripts/howler.min.js"></script>
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/app.js"></script>
 
 </body>
 

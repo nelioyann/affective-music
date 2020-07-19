@@ -22,13 +22,13 @@ $size_desktop: 1024px;
 :root {
   font-size: 15px;
   @include minq($size_mobile) {
-    font-size: 15px;
+    font-size: 21px;
   }
   @include minq($size_tablet) {
-    font-size: 17px;
+    font-size: 20px;
   }
   @include minq($size_desktop) {
-    font-size: 20px;
+    font-size: 22px;
   }
 }
 
@@ -50,13 +50,14 @@ body {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  padding: 1em;
+  padding: 0 1em;
   overflow: hidden;
   min-height: 100vh;
   font-family: $font_body;
   color: $color_dark;
   position: relative;
-  
+  // display: grid;
+  // grid-template-columns: auto 1fr;
   /* color: $color_dark;
   background-color: $color_light; */
 }
@@ -75,12 +76,12 @@ main {
   }
   &__tagline {
     line-height:2;
-    font-family: $font_headings;
+    font-family: $font_body;
   }
 }
 
 .measures {
-  height: 40vh;
+  // height: 40vh;
   width: 100%;
   display: flex;
   // flex-direction: column;
@@ -123,6 +124,7 @@ main {
       &_beating {
         animation: heartbeat;
         animation-duration: 2s;
+        animation-play-state: paused;
         animation-iteration-count: infinite;
       }
       path {
@@ -136,13 +138,18 @@ main {
 }
 
 .player{
+  margin-top: 4em;
   &__tracklist{
   list-style-type: none;
   margin: 0; padding: 0;
+  display: flex;
+  flex-wrap: wrap;
   &__sample{
+    width: max-content;
+
     // background-color: $color_light;
     // color: $color_dark;
-    padding: 1em;
+    padding: 0.5em;
     margin: 0.5em;
     // font-weight: bold;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
@@ -204,7 +211,7 @@ main {
     box-shadow: 0 0 0 0 rgba($color_primary, 0.6);
   }
   70% {
-    box-shadow: 0 0 0 3em rgba($color_primary, 0);
+    box-shadow: 0 0 0 2em rgba($color_primary, 0);
   }
   100% {
     box-shadow: 0 0 0 0 rgba($color_primary, 0);

@@ -8,9 +8,13 @@ const assets = [
     './styles/style.css',
     './scripts/script.js',
     './scripts/app.js',
-    '/images/icons/icon-72x72.png',
-    '/images/icons/icon-144x144.png',
-    '/images/icons/icon-152x152.png'
+    './images/icons/icon-72x72.png',
+    './images/icons/icon-144x144.png',
+    './images/icons/icon-152x152.png',
+    "./songs/bensound-summer.mp3",
+    "./songs/bensound-elevate.mp3",
+    "./songs/bensound-cute.mp3",
+    "./songs/bensound-ukelele.mp3"
     
     
 ]
