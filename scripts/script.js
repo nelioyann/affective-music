@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const hr_value = document.querySelector(".measures__bpm__value");
 	const trigger = document.querySelector(".measures__heart");
 	const tracklist = document.querySelector(".player__tracklist");
-
+  const heart__image = document.querySelector(".measures__heart__image_beating")
 	const local_samples = [
 		"../songs/bensound-summer.mp3",
 		"../songs/bensound-elevate.mp3",
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		let currentBpm = parseInt(a.join(" ").slice(-4));
 		hr_value.innerHTML = currentBpm;
 		let speed = 0.5 + currentBpm / 100;
-		document.querySelector(".speed").innerHTML = speed.toFixed(2);
+		document.querySelector(".speed").innerHTML = `Current speed: ${speed.toFixed(2)}`;
 		sound.rate(speed.toFixed(2));
 	};
 
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			await characteristic.startNotifications();
 			console.log("Notif started");
 			sound.play();
-
+      heart__image.style.animationPlayState = "running"
 			characteristic.addEventListener(
 				"characteristicvaluechanged",
 				handleHeartbeatChange

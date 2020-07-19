@@ -22,7 +22,7 @@ $size_desktop: 1024px;
 :root {
   font-size: 15px;
   @include minq($size_mobile) {
-    font-size: 21px;
+    font-size: 18px;
   }
   @include minq($size_tablet) {
     font-size: 20px;
