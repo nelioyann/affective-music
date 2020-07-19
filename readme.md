@@ -7,9 +7,6 @@ Affective Music is an application that synchronize the music your hear to your h
 - Xiaomi Mi Band 4 (other versions haven't been tested yet)
 - Android device with chrome installed
 
-## Does it change anything
-
-I have no idea. But it is possible.
 
 ## Usecases
 
