@@ -180,13 +180,21 @@ main {
 }
 
 .player__controls__button {
-  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
-          box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
   cursor: pointer;
   padding: 0.3em;
+}
+
+.player__controls__button__mute {
+  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+          box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.player__controls__button__mute-muted {
+  background-color: #e4446c;
+  color: #e2d6d6;
 }
 
 .connection {
