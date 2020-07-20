@@ -1,4 +1,4 @@
-const version = 89;
+const version = 899;
 const staticCacheName = `site-static-v${version}`
 const dynamicCache = `site-dynamic-v${version}`
 // Fichier qui seront cacher
@@ -14,7 +14,7 @@ const assets = [
     "./songs/bensound-summer.mp3",
     "./songs/bensound-elevate.mp3",
     "./songs/bensound-cute.mp3",
-    "./songs/bensound-ukelele.mp3"
+    "./songs/bensound-ukulele.mp3"
     
     
 ]
