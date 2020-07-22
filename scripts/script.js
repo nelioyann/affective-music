@@ -10,8 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const mute = document.querySelector(".player__controls__button__mute");
   let volume = 0.3;
   const handleMute = (event) => {
-    event.target.classList.toggle("player__controls__button__mute-muted");
-    if (event.target.classList.contains("player__controls__button__mute-muted")) {
+    mute.classList.toggle("player__controls__button__mute-muted");
+    if (
+     mute.classList.contains("player__controls__button__mute-muted")
+    ) {
       Howler.mute(true);
     } else {
       Howler.mute(false);
@@ -54,9 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     event.target.classList.add("player__tracklist__sample-active");
     let title = `../songs/${event.target.getAttribute("data-src")}`;
-	// mute.classList.remove("player__controls__button__mute-muted")
+    mute.classList.remove("player__controls__button__mute-muted");
 
-	// Howler.mute(false)
+    Howler.mute(false);
     playSample(title);
   };
   samples.forEach((sample) => {

@@ -20,7 +20,7 @@ $size_desktop: 1024px;
 :root {
   font-size: 15px;
   @include minq($size_mobile) {
-    font-size: 18px;
+    font-size: 17px;
   }
   @include minq($size_tablet) {
     font-size: 20px;
@@ -139,13 +139,14 @@ main {
     margin: 0;
     padding: 0;
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
     &__sample {
       width: max-content;
       cursor: pointer;
       // background-color: $color_light;
       // color: $color_dark;
-      padding: 0.5em;
+      padding:0.3em  0.5em;
       margin: 0.5em;
       // font-weight: bold;
       box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
@@ -156,6 +157,7 @@ main {
     }
   }
   &__controls {
+    margin: 2em 0;
     &__button {
       width: max-content;
       cursor: pointer;
@@ -170,8 +172,11 @@ main {
           box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
         }
         &-muted{
-          background-color: $color_primary;
           color: $color_light;
+          svg{
+            background-color: $color_primary;
+            
+          }
         }
       }
     }

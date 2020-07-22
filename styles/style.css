@@ -6,7 +6,7 @@
 
 @media screen and (min-width: 320px) {
   :root {
-    font-size: 18px;
+    font-size: 17px;
   }
 }
 
@@ -158,6 +158,9 @@ main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
@@ -167,7 +170,7 @@ main {
   width: -moz-max-content;
   width: max-content;
   cursor: pointer;
-  padding: 0.5em;
+  padding: 0.3em  0.5em;
   margin: 0.5em;
   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
           box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
@@ -176,6 +179,10 @@ main {
 .player__tracklist__sample-active {
   background-color: #e4446c;
   color: #e2d6d6;
+}
+
+.player__controls {
+  margin: 2em 0;
 }
 
 .player__controls__button {
@@ -195,8 +202,11 @@ main {
 }
 
 .player__controls__button__mute-muted {
-  background-color: #e4446c;
   color: #e2d6d6;
+}
+
+.player__controls__button__mute-muted svg {
+  background-color: #e4446c;
 }
 
 .connection {
