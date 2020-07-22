@@ -30,7 +30,6 @@
 body {
   margin: 0;
   padding: 0;
-  border: 2px solid #e4446c;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   overflow: hidden;
@@ -184,10 +183,13 @@ main {
   width: -moz-max-content;
   width: max-content;
   cursor: pointer;
-  padding: 0.3em;
 }
 
-.player__controls__button__mute {
+.player__controls__button__mute svg {
+  width: 2em;
+  height: 2em;
+  padding: 0.3em;
+  border-radius: 0.2em;
   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
           box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
 }

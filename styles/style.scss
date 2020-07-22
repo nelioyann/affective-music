@@ -37,7 +37,7 @@ $size_desktop: 1024px;
 body {
   margin: 0;
   padding: 0;
-  border: 2px solid $color_primary;
+  // border: 2px solid $color_primary;
   box-sizing: border-box;
   overflow: hidden;
   background-color: $color_light;
@@ -159,9 +159,16 @@ main {
     &__button {
       width: max-content;
       cursor: pointer;
-      padding: 0.3em;
+      
       &__mute{
-        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+        
+        svg{
+          width: 2em;
+          height: 2em;
+          padding: 0.3em;
+          border-radius: 0.2em;
+          box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+        }
         &-muted{
           background-color: $color_primary;
           color: $color_light;
