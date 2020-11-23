@@ -10,6 +10,6 @@ Affective Music is an application that synchronize the music your hear to your h
 
 ## Usecases
 
-This application could be during a physical activity.
-Intensive workout with high heart rate will lead to high tempo music.
-Moderate workout willbe accompanied with slow tempo music.
+This application could be used during a physical activity.
+Intensive workout with high heart rate will lead to higher tempo music.
+Moderate workout will be accompanied with slow tempo music.
