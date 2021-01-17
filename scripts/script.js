@@ -11,9 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let volume = 0.3;
   const handleMute = (event) => {
     mute.classList.toggle("player__controls__button__mute-muted");
-    if (
-     mute.classList.contains("player__controls__button__mute-muted")
-    ) {
+    if (mute.classList.contains("player__controls__button__mute-muted")) {
       Howler.mute(true);
     } else {
       Howler.mute(false);
@@ -86,15 +84,21 @@ document.addEventListener("DOMContentLoaded", () => {
         acceptAllDevices: true,
         optionalServices: ["heart_rate"],
       };
+
+      // Connect device
       var device = await navigator.bluetooth.requestDevice(options);
       console.log(device);
       var server = await device.gatt.connect();
       console.log(server);
+
+      // Get Herat Rate data
       var service = await server.getPrimaryService("heart_rate");
       console.log(service);
       var characteristic = await service.getCharacteristic(
         "heart_rate_measurement"
       );
+
+      // Listen to changes on the device
       await characteristic.startNotifications();
       console.log("Notif started");
       sound.play();

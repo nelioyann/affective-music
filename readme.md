@@ -1,6 +1,5 @@
 # Heart Rate based music
-
-Affective Music is an application that synchronize the music your hear to your heart beat.
+Music has an influence on heart rate. But how does your heart rate determine the music you listen to? Look no further. Affective Music turns your heart into an orchestra conductor so that your heart rate translates into music notes.
 
 ## Requirements
 
@@ -25,3 +24,15 @@ Just for fun, nothing more, nothing less.
 - [ ] Test bluetooth connection
 - [ ] Add guidelines
 - [ ] Styling
+
+### Playlist Functionnality
+
+[ ] Record the heart rate over 1 minute
+[ ] Save the date locally by date
+[ ] Retrieve the data  
+[ ] Show the data in a playlist 
+[ ] Play notes associated to each numerical value
+
+### Player Functionnality
+
+[ ] Add a volume handler
