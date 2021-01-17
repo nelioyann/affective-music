@@ -14,7 +14,7 @@ This application could be used during a physical activity.
 Intensive workout with high heart rate will lead to higher tempo music.
 Moderate workout will be accompanied with slow tempo music.
 
-# Fun
+### Fun
 Just for fun, nothing more, nothing less.
 
 ## Next Steps
@@ -27,12 +27,12 @@ Just for fun, nothing more, nothing less.
 
 ### Playlist Functionnality
 
-[ ] Record the heart rate over 1 minute
-[ ] Save the date locally by date
-[ ] Retrieve the data  
-[ ] Show the data in a playlist 
-[ ] Play notes associated to each numerical value
+- [ ] Record the heart rate over 1 minute
+- [ ] Save the date locally by date
+- [ ] Retrieve the data  
+- [ ] Show the data in a playlist 
+- [ ] Play notes associated to each numerical value
 
 ### Player Functionnality
 
-[ ] Add a volume handler
+- [ ] Add a volume handler
