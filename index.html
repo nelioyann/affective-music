@@ -92,6 +92,18 @@
         crossorigin="anonymous"></script>
     <script src="./scripts/howler.min.js"></script>
     <script src="./scripts/script.js"></script>
+
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                // path from the root folder
+                navigator.serviceWorker
+                    .register("./sw.js")
+                    .then(reg => console.log("service worker registered"))
+                    .catch(err => console.log("service worker not registered"));
+            });
+        }
+    </script>
     <!-- <script src="./scripts/app.js"></script> -->
 
 </body>

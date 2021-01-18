@@ -1,4 +1,4 @@
-# Heart Rate based music
+# HeartBeats
 Music has an influence on heart rate. But how does your heart rate determine the music you listen to? Look no further. Affective Music turns your heart into an orchestra conductor so that your heart rate translates into music notes.
 
 ## Requirements
