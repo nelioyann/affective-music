@@ -21,8 +21,8 @@ Just for fun, nothing more, nothing less.
 
 
 - [ ] Deploy MVP 
-- [ x ] Test bluetooth connection
-- [ ] Add guidelines
+- [x] Test bluetooth connection
+- [x] Add guidelines
 - [ ] Styling
 
 # SEO
