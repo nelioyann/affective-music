@@ -25,6 +25,12 @@ Just for fun, nothing more, nothing less.
 - [ ] Add guidelines
 - [ ] Styling
 
+# SEO
+- [ ] Add Robot.txt
+- [ ] Add Icons for IOS, Android and Desktop
+
+
+
 ### Playlist Functionnality
 
 - [ ] Record the heart rate over 1 minute
