@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
       a.push("0x" + ("00" + value.getUint8(i).toString(16)).slice(-2));
     }
     let currentBpm = parseInt(a.join(" ").slice(-4));
+    elMessage.innerText = currentBpm;
     // hr_value.innerHTML = currentBpm;
     // let speed = 0.5 + currentBpm / 100;
     // document.querySelector(
