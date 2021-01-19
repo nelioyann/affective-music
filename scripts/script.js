@@ -1,6 +1,13 @@
+// const { max } = require("lodash");
+
 document.addEventListener("DOMContentLoaded", () => {
   const elPairingTrigger = document.querySelector(".connect-band");
   const elMessage = document.querySelector(".message");
+
+  const heartRateValues = [];
+  const maxLenght = 20;
+  document.querySelector(".heart-rates h3").innerText += ` ${maxLenght}`
+
 
   const handleHeartbeatChange = (event) => {
     let value = event.target.value;
@@ -9,7 +16,15 @@ document.addEventListener("DOMContentLoaded", () => {
       a.push("0x" + ("00" + value.getUint8(i).toString(16)).slice(-2));
     }
     let currentBpm = parseInt(a.join(" ").slice(-4));
-    elMessage.innerText = currentBpm;
+
+    // As long as the lenght isn't reached add values
+    if (heartRateValues.length < maxLenght){
+      document.querySelector(".heart-rates .grid").innerHTML += `<button>${currentBpm}</button>`;
+      heartRateValues.push(currentBpm)
+    }
+    // elMessage.innerText = currentBpm;
+
+
     // hr_value.innerHTML = currentBpm;
     // let speed = 0.5 + currentBpm / 100;
     // document.querySelector(
@@ -19,10 +34,10 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   // console.clear();
   const connect_miband = async () => {
-    console.log("Connection initiated");
     try {
       const options = {
         filters: [{ namePrefix: "Mi Smart Band" }],
+        optionalServices: ["heart_rate"]
       };
 
       // Connect device
@@ -31,9 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Get Herat Rate data
       const service = await server.getPrimaryService("heart_rate");
-      const characteristic = await service.getCharacteristic(
-        "heart_rate_measurement"
-      );
+      const characteristic = await service.getCharacteristic("heart_rate_measurement");
 
       // Listen to changes on the device
       await characteristic.startNotifications();

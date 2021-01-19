@@ -21,7 +21,7 @@ Just for fun, nothing more, nothing less.
 
 
 - [ ] Deploy MVP 
-- [ ] Test bluetooth connection
+- [ x ] Test bluetooth connection
 - [ ] Add guidelines
 - [ ] Styling
 
@@ -33,8 +33,8 @@ Just for fun, nothing more, nothing less.
 
 ### Playlist Functionnality
 
-- [ ] Record the heart rate over 1 minute
-- [ ] Save the date locally by date
+- [ ] Read heart rate over a specific amount of time
+- [ ] Save the data locally by date/time
 - [ ] Retrieve the data  
 - [ ] Show the data in a playlist 
 - [ ] Play notes associated to each numerical value
