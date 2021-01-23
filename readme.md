@@ -1,4 +1,4 @@
-# HeartBeats
+# HeartBeats Ionic Version
 Music has an influence on heart rate. But how does your heart rate determine the music you listen to? Affective Music turns your heart into an orchestra conductor who translates your beats into music notes.
 
 ## Requirements
