@@ -67,7 +67,7 @@ const Tab1: React.FC = () => {
     }
     let currentBpm = parseInt(a.join(" ").slice(-4));
     console.log(currentBpm)
-    synth.triggerAttackRelease("E4", "8n")
+    synth.triggerAttackRelease(currentBpm*10, "4n")
     setHrValue(currentBpm)
 
     // As long as the lenght isn't reached add values
