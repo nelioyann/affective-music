@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import * as Tone from 'tone';
 import {
   IonContent,
   IonHeader,
@@ -24,7 +25,7 @@ import { bluetooth, logOutOutline } from "ionicons/icons";
 
 const Tab1: React.FC = () => {
 
- 
+  const synth = new Tone.Synth().toDestination();
   // let mobileNavigatorObject: any = window.navigator;
 
   const [bleAvailability, setbleAvailability] = useState(false);
@@ -66,6 +67,7 @@ const Tab1: React.FC = () => {
     }
     let currentBpm = parseInt(a.join(" ").slice(-4));
     console.log(currentBpm)
+    synth.triggerAttackRelease("E4", "8n")
     setHrValue(currentBpm)
 
     // As long as the lenght isn't reached add values
