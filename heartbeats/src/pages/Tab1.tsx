@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   IonContent,
   IonHeader,
@@ -13,11 +13,12 @@ import {
   IonButton,
   IonIcon,
   IonText,
+  IonToast,
 } from "@ionic/react";
 
 // import ExploreContainer from "../components/ExploreContainer";
 import "./Tab1.css";
-import { bluetooth } from "ionicons/icons";
+import { bluetooth, logOutOutline } from "ionicons/icons";
 
 
 
@@ -27,11 +28,18 @@ const Tab1: React.FC = () => {
   // let mobileNavigatorObject: any = window.navigator;
 
   const [bleAvailability, setbleAvailability] = useState(false);
-  // const [hrValue, setHrValue] = useState(0);
+  const [isPaired, setIsPaired] = useState(false);
+  const [hrValue, setHrValue] = useState(0);
 
+  useEffect(()=>{
+    checkBlAvailability()
+  }, [bleAvailability])
+
+
+  var device: BluetoothDevice;
   
   // Checks if BLE pairing is supported
-  (async () => {
+  const checkBlAvailability = async () => {
     try {
       const isBluetoothAvailable = await navigator.bluetooth.getAvailability();
       console.log("check ble a ");
@@ -39,7 +47,7 @@ const Tab1: React.FC = () => {
     } catch (error) {
       console.log("Argh! " + error);
     }
-  })();
+  };
 
   const handleHeartbeatChange = (event: Event) => {
     // console.log(event)
@@ -58,7 +66,7 @@ const Tab1: React.FC = () => {
     }
     let currentBpm = parseInt(a.join(" ").slice(-4));
     console.log(currentBpm)
-    // setHrValue(currentBpm)
+    setHrValue(currentBpm)
 
     // As long as the lenght isn't reached add values
     // if (heartRateValues.length < maxLenght){
@@ -79,7 +87,7 @@ const Tab1: React.FC = () => {
       if (window.navigator && window.navigator.bluetooth) {
         // Here write your logic of mobileNavigatorObject.bluetooth.requestDevice();
         // Connect device
-        const device = await navigator.bluetooth.requestDevice(options);
+        device = await navigator.bluetooth.requestDevice(options);
         console.log("Connect Miband - Device retrieved");
         
         const server = await device.gatt?.connect();
@@ -96,6 +104,7 @@ const Tab1: React.FC = () => {
         // Listen to changes on the device
         await characteristic?.startNotifications();
         console.log("seems to work");
+        setIsPaired(true)
         characteristic?.addEventListener(
           "characteristicvaluechanged",
           handleHeartbeatChange
@@ -106,6 +115,18 @@ const Tab1: React.FC = () => {
     }
   };
 
+  const disconnect_miband = () =>{
+    console.log("Bug")
+    // if (!device) return;
+    if(device && device?.gatt){
+      console.log("disconnecting device")
+      if(device.gatt.connected) device.gatt.disconnect();
+      // TODO add a notification
+      setIsPaired(false)
+      console.log("device disconnected")
+    }
+  }
+
   return (
     <IonPage>
       <IonHeader>
@@ -114,6 +135,18 @@ const Tab1: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+      <IonToast
+        isOpen={isPaired}
+        message="Device paired"
+        duration={500}
+      />
+      <IonToast
+        isOpen={!isPaired}
+        message="Device not paired"
+        duration={500}
+      />
+
+
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">HeartBeats</IonTitle>
@@ -138,9 +171,13 @@ const Tab1: React.FC = () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta quos
             illum ipsa error architecto sit labore ea nobis, accusantium ullam!
           </IonCardContent>
-          <IonButton expand="block" disabled={!bleAvailability} onClick={() => connect_miband()}>
+          <IonButton expand="block" disabled={!bleAvailability || isPaired} onClick={() => connect_miband()}>
             Pair Device
             <IonIcon icon={bluetooth} />
+          </IonButton>
+          <IonButton expand="block" disabled={false} onClick={() => disconnect_miband()}>
+            UnPair Device
+            <IonIcon icon={logOutOutline} />
           </IonButton>
         </IonCard>
         <IonCard>
@@ -149,7 +186,7 @@ const Tab1: React.FC = () => {
             <IonCardTitle>Heart Rate</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-            <IonText>78bpm</IonText>
+            <IonText> {hrValue} bpm</IonText>
           </IonCardContent>
         </IonCard>
       </IonContent>
