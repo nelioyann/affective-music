@@ -12,8 +12,8 @@ import {
   IonCardContent,
   IonButton,
   IonIcon,
-  IonText,
   IonToast,
+  IonBadge,
 } from "@ionic/react";
 
 // import ExploreContainer from "../components/ExploreContainer";
@@ -88,7 +88,7 @@ const Tab1: React.FC = () => {
         // Here write your logic of mobileNavigatorObject.bluetooth.requestDevice();
         // Connect device
         device = await navigator.bluetooth.requestDevice(options);
-        console.log("Connect Miband - Device retrieved");
+        console.log("Connect Miband - Device retrieved", device);
         
         const server = await device.gatt?.connect();
         console.log("Connect Miband - Server retrieved");
@@ -113,11 +113,14 @@ const Tab1: React.FC = () => {
     } catch (e) {
       console.log(e);
     }
+
+    
   };
 
   const disconnect_miband = () =>{
     console.log("Bug")
     // if (!device) return;
+    console.log(device?.gatt?.connected)
     if(device && device?.gatt){
       console.log("disconnecting device")
       if(device.gatt.connected) device.gatt.disconnect();
@@ -171,11 +174,11 @@ const Tab1: React.FC = () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta quos
             illum ipsa error architecto sit labore ea nobis, accusantium ullam!
           </IonCardContent>
-          <IonButton expand="block" disabled={!bleAvailability || isPaired} onClick={() => connect_miband()}>
+          <IonButton  disabled={!bleAvailability || isPaired} onClick={() => connect_miband()}>
             Pair Device
             <IonIcon icon={bluetooth} />
           </IonButton>
-          <IonButton expand="block" disabled={false} onClick={() => disconnect_miband()}>
+          <IonButton  disabled={true} onClick={() => disconnect_miband()}>
             UnPair Device
             <IonIcon icon={logOutOutline} />
           </IonButton>
@@ -183,10 +186,10 @@ const Tab1: React.FC = () => {
         <IonCard>
           <IonCardHeader>
             <IonCardSubtitle>Measuring Heart Rate</IonCardSubtitle>
-            <IonCardTitle>Heart Rate</IonCardTitle>
+            <IonCardTitle>Heart Rate (bpm)</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-            <IonText> {hrValue} bpm</IonText>
+          <IonBadge color="warning">{hrValue} bpm</IonBadge>
           </IonCardContent>
         </IonCard>
       </IonContent>
