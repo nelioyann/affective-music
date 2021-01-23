@@ -1,10 +1,14 @@
 # HeartBeats
-Music has an influence on heart rate. But how does your heart rate determine the music you listen to? Look no further. Affective Music turns your heart into an orchestra conductor so that your heart rate translates into music notes.
+Music has an influence on heart rate. But how does your heart rate determine the music you listen to? Affective Music turns your heart into an orchestra conductor who translates your beats into music notes.
 
 ## Requirements
 
-- Xiaomi Mi Band 4 (other versions haven't been tested yet)
-- Android device with chrome installed
+### Device
+- Xiaomi Mi Band 4 
+- Xiaomi Mi Band 5 
+
+### Browser
+- Chrome, Opera (on Android)
 
 
 ## Usecases
