@@ -161,7 +161,7 @@ const Tab1: React.FC = () => {
         <IonCard>
           <IonCardContent>
             {bleAvailability ? "🟢" : "🔴"} Bluetooth API is{" "}
-            {bleAvailability ? "supported" : "not supported"}
+            {bleAvailability ? "supported" : "not supported in this browser or device"}
           </IonCardContent>
         </IonCard>
         <IonCard>
