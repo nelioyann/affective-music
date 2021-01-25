@@ -30,7 +30,6 @@ import {
 import "./Tab2.css";
 import {
   chevronDownOutline,
-  filterOutline,
   pauseOutline,
   playOutline,
   stopOutline,
@@ -64,10 +63,12 @@ const Tab2: React.FC = () => {
     { name, id, beats }: Song
   ): void => {
     setShowModal(true);
+    console.log(event.target)
     // let id = event.currentTarget.key
     console.log(id, name, beats);
     // let songName = event.currentTarget.getAttribute("data-name") || "";
     setCurrentSong({ name, id, beats });
+    setSongs([...songs])
   };
   return (
     <IonPage>
