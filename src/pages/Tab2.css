@@ -3,7 +3,7 @@ ion-label{
 }
 
 ion-thumbnail{
-    --size: 200px;
+    --size: 150px;
     --border-radius: 5px;
     margin: 10px auto;
 }
