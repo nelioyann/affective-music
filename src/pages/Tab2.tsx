@@ -19,6 +19,7 @@ import {
   IonRange,
   IonSegment,
   IonSegmentButton,
+  IonThumbnail,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
@@ -27,16 +28,31 @@ import "./Tab2.css";
 import { filterOutline, playOutline } from "ionicons/icons";
 
 const Tab2: React.FC = () => {
-
   const [showModal, setShowModal] = useState(false);
-  const [currentSong, setCurrentSong] = useState("")
+  const [currentSong, setCurrentSong] = useState({});
 
+  const [songs, setSongs] = useState([
+    {
+      name: "Crescendo",
+      beats: [70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80],
+      id: 20200125124400,
+    },
+    {
+      name: "Diminuendo",
+      beats: [80, 79, 78, 77, 76, 75, 74, 73, 72, 71, 70],
+      id: 20200125124401,
+    },
+  ]);
 
-  const handleMusicSelection = (event: React.MouseEvent<HTMLIonItemElement, MouseEvent>) : void =>{
-    setShowModal(true)
-    let songName = event.currentTarget.getAttribute("data-name") || ""; 
-    setCurrentSong(songName)
-  }
+  const handleMusicSelection = (
+    event: React.MouseEvent<HTMLIonItemElement, MouseEvent>
+  ): void => {
+    setShowModal(true);
+    // let id = event.currentTarget.key
+    console.log(event.currentTarget)
+    let songName = event.currentTarget.getAttribute("data-name") || "";
+    setCurrentSong(songName);
+  };
   return (
     <IonPage>
       <IonHeader>
@@ -45,48 +61,40 @@ const Tab2: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+        <IonModal
+          isOpen={showModal}
+          swipeToClose={true}
+          onDidDismiss={() => setShowModal(false)}
+        >
+          <IonToolbar>
+            <IonButtons slot="end">
+              <IonButton onClick={() => setShowModal(false)}>
+                <IonIcon icon={filterOutline} />
+              </IonButton>
+            </IonButtons>
+          </IonToolbar>
 
-      <IonModal isOpen={showModal} >
-        <IonToolbar>
-          <IonButtons slot="end">
-            <IonButton onClick={() => setShowModal(false)}>
-              <IonIcon  icon={filterOutline}/>
-            </IonButton>
-          </IonButtons>
-        </IonToolbar>
+          <IonCard>
+            <IonThumbnail>
+              <img src="./assets/logo.png" alt="" />
+            </IonThumbnail>
+            <IonCardHeader>
+              <IonCardTitle>{currentSong}</IonCardTitle>
+              <IonCardSubtitle>saved on 00.00.0</IonCardSubtitle>
+            </IonCardHeader>
+            <IonCardContent>
+              <IonItem>
+                <IonLabel slot="start">00:00</IonLabel>
+                <IonRange></IonRange>
+                <IonLabel slot="end">00:00</IonLabel>
+              </IonItem>
+            </IonCardContent>
+          </IonCard>
 
-        <IonCard>
-          <img width="200" src="./assets/logo.png" alt=""/>
-          <IonCardHeader>
-            <IonCardTitle>
-              {currentSong}
-            </IonCardTitle>
-            <IonCardSubtitle>
-              saved on 00.00.0
-            </IonCardSubtitle>
-          </IonCardHeader>
-          <IonCardContent>
           <IonItem>
-          <IonRange></IonRange>
-          <IonLabel slot="start">
-            00:00
-          </IonLabel>
-          <IonLabel slot="end">
-            00:00
-          </IonLabel>
-        </IonItem>
-          </IonCardContent>
-
-        </IonCard>
-
-        <IonItem>
-          <IonLabel>
-            Playing Next
-          </IonLabel>
-        </IonItem>
-
-        
-      </IonModal>
+            <IonLabel>Playing Next</IonLabel>
+          </IonItem>
+        </IonModal>
 
         <IonHeader collapse="condense">
           <IonToolbar>
@@ -119,14 +127,28 @@ const Tab2: React.FC = () => {
         <IonCard>
           <IonList>
             <IonListHeader>Saved entries</IonListHeader>
-            <IonItem data-name="Crescendo" onClick={(e) => handleMusicSelection(e)}>
+
+            {songs.map((song) => {
+              return (
+                <IonItem
+                  key={song.id}
+                  data-name={song.name}
+                  onClick={(e) => handleMusicSelection(e)}
+                >
+                  <IonIcon slot="end" icon={playOutline} />
+                  <IonLabel>{song.name}</IonLabel>
+                </IonItem>
+              );
+            })}
+
+            {/* <IonItem data-name="Crescendo" onClick={(e) => handleMusicSelection(e)}>
               <IonIcon slot="end" icon={playOutline} />
               <IonLabel>Crescendo</IonLabel>
             </IonItem>
             <IonItem data-name="Diminuendo" onClick={(e) => handleMusicSelection(e)}>
               <IonIcon slot="end" icon={playOutline} />
               <IonLabel>Diminuendo</IonLabel>
-            </IonItem>
+            </IonItem> */}
           </IonList>
         </IonCard>
       </IonContent>
