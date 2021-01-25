@@ -32,6 +32,8 @@ const Tab1: React.FC = () => {
   const [isPaired, setIsPaired] = useState(false);
   const [hrValue, setHrValue] = useState(0);
 
+  const [pairedToast, setPairedToast] = useState(false);
+
   useEffect(()=>{
     checkBlAvailability()
   }, [bleAvailability])
@@ -107,6 +109,7 @@ const Tab1: React.FC = () => {
         await characteristic?.startNotifications();
         console.log("seems to work");
         setIsPaired(true)
+        setPairedToast(true)
         characteristic?.addEventListener(
           "characteristicvaluechanged",
           handleHeartbeatChange
@@ -141,15 +144,15 @@ const Tab1: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
       <IonToast
-        isOpen={isPaired}
-        message="Device paired"
+        isOpen={pairedToast}
+        message="Device pairedToast"
         duration={500}
       />
-      <IonToast
+      {/* <IonToast
         isOpen={!isPaired}
         message="Device not paired"
         duration={500}
-      />
+      /> */}
 
 
         <IonHeader collapse="condense">
