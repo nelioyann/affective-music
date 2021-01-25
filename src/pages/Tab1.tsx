@@ -176,8 +176,8 @@ const Tab1: React.FC = () => {
           </IonCardHeader>
 
           <IonCardContent>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta quos
-            illum ipsa error architecto sit labore ea nobis, accusantium ullam!
+            Record your heart beats, choose the right music synthetiser for you and listen to the resulting song.
+            All recordings are saved locally.
           </IonCardContent>
           <IonButton  disabled={!bleAvailability || isPaired} onClick={() => connect_miband()}>
             Pair Device
