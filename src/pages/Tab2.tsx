@@ -29,9 +29,18 @@ import { filterOutline, playOutline } from "ionicons/icons";
 
 const Tab2: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
-  const [currentSong, setCurrentSong] = useState({});
+  const [currentSong, setCurrentSong] = useState<Song>();
 
-  const [songs, setSongs] = useState([
+
+
+  
+  interface Song {
+    name: string,
+    beats: number[],
+    id: number
+  }
+
+  const [songs, setSongs] = useState<Song[]>([
     {
       name: "Crescendo",
       beats: [70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80],
@@ -45,13 +54,13 @@ const Tab2: React.FC = () => {
   ]);
 
   const handleMusicSelection = (
-    event: React.MouseEvent<HTMLIonItemElement, MouseEvent>
+    event: React.MouseEvent<HTMLIonItemElement, MouseEvent>, {name, id, beats}: Song
   ): void => {
     setShowModal(true);
     // let id = event.currentTarget.key
-    console.log(event.currentTarget)
-    let songName = event.currentTarget.getAttribute("data-name") || "";
-    setCurrentSong(songName);
+    console.log(id, name, beats)
+    // let songName = event.currentTarget.getAttribute("data-name") || "";
+    setCurrentSong({name, id, beats});
   };
   return (
     <IonPage>
@@ -79,8 +88,9 @@ const Tab2: React.FC = () => {
               <img src="./assets/logo.png" alt="" />
             </IonThumbnail>
             <IonCardHeader>
-              <IonCardTitle>{currentSong}</IonCardTitle>
-              <IonCardSubtitle>saved on 00.00.0</IonCardSubtitle>
+              <IonCardSubtitle>saved on {currentSong?.id}</IonCardSubtitle>
+              <IonCardTitle>{currentSong?.name}</IonCardTitle>
+              <p>{currentSong?.beats.length} beats</p>
             </IonCardHeader>
             <IonCardContent>
               <IonItem>
@@ -133,7 +143,7 @@ const Tab2: React.FC = () => {
                 <IonItem
                   key={song.id}
                   data-name={song.name}
-                  onClick={(e) => handleMusicSelection(e)}
+                  onClick={(e) => handleMusicSelection(e, song)}
                 >
                   <IonIcon slot="end" icon={playOutline} />
                   <IonLabel>{song.name}</IonLabel>
