@@ -44,7 +44,6 @@ const Tab2: React.FC = () => {
     beats: [],
     id: 0
   });
-  var beatIndex = 0;
 
   const membrane = new Tone.MembraneSynth().toDestination();
   const am = new Tone.Synth().toDestination();
@@ -71,23 +70,13 @@ const Tab2: React.FC = () => {
     },
   ]);
 
-  // function repeat () {
-    
 
-  //   let beats = currentSong?.beats || [];
-
-  //   //triggered every eighth note.
-  //   console.log(beatIndex);
-  //   // synth.triggerAttackRelease(beats[beatIndex], "4n");
-  //   beatIndex = beatIndex + 1;
-  // }
 
   const playSong = (beats: number[]): void => {
 
     let interval = "4n";
     let index = 0;
     let iterations = 32;
-    // let beats = currentSong?.beats || [];
 
     let loop = new Tone.Loop();
 
@@ -100,15 +89,11 @@ const Tab2: React.FC = () => {
       index++
       if (index >= iterations) {loop.dispose(); Tone.Transport.stop()}
     }
-    console.log();
-    // console.log(beatIndex);
     // if (beats && beatIndex < beats.length) {
       loop.iterations = iterations;
       loop.interval = interval
       loop.callback = repeat
       loop.start(0)
-    // } 
-    // console.log("beatIndex afeter loop", beatIndex);
     console.log("beatIndex afeter loop", beats);
     console.log(loop)
     
@@ -119,13 +104,7 @@ const Tab2: React.FC = () => {
     { name, id, beats }: Song
   ): void => {
     setShowModal(true);
-    // console.log(showModal)
-    // let id = event.currentTarget.key
-    // console.log(id, name, beats);
-    // setBeatIndex(0)
-    beatIndex = 0;
-    // let songName = event.currentTarget.getAttribute("data-name") || "";
-    // setCurrentSong({ name, id, beats });
+
     console.log("current song set", currentSong);
     setSongs([...songs]);
     Tone.Transport.start();
