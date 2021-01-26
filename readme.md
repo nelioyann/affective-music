@@ -10,6 +10,8 @@ Music has an influence on heart rate. But how does your heart rate determine the
 ### Browser
 - Chrome, Opera (on Android)
 
+### Dependencies
+- Tone.js
 
 ## Usecases
 

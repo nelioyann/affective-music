@@ -34,10 +34,20 @@ import {
   playOutline,
   stopOutline,
 } from "ionicons/icons";
+import * as Tone from "tone";
 
 const Tab2: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
-  const [currentSong, setCurrentSong] = useState<Song>();
+  const [currentSong, setCurrentSong] = useState<Song>({
+    name: "",
+    beats: [],
+    id: 0
+  });
+  var beatIndex = 0;
+
+  const synth = new Tone.MembraneSynth().toDestination();
+  // const am_synth = new Tone.Synth().toDestination();
+  // const fm_synth = new Tone.Synth().toDestination();
 
   interface Song {
     name: string;
@@ -58,17 +68,66 @@ const Tab2: React.FC = () => {
     },
   ]);
 
+  // function repeat () {
+    
+
+  //   let beats = currentSong?.beats || [];
+
+  //   //triggered every eighth note.
+  //   console.log(beatIndex);
+  //   // synth.triggerAttackRelease(beats[beatIndex], "4n");
+  //   beatIndex = beatIndex + 1;
+  // }
+
+  const playSong = (beats: number[]): void => {
+    
+    let interval = "4n";
+    let index = 0;
+    let iterations = 32;
+    // let beats = currentSong?.beats || [];
+
+    let loop = new Tone.Loop();
+
+
+    const repeat = () =>{
+      console.log("repeat triggered", index)
+      synth.triggerAttackRelease(beats[index%4], "8n");
+      
+      console.log(index%8)
+      index++
+      if (index >= iterations) loop.dispose()
+    }
+    console.log();
+    // console.log(beatIndex);
+    // if (beats && beatIndex < beats.length) {
+      loop.iterations = iterations;
+      loop.interval = interval
+      loop.callback = repeat
+      loop.start(0)
+    // } 
+    // console.log("beatIndex afeter loop", beatIndex);
+    console.log("beatIndex afeter loop", beats);
+    console.log(loop)
+    
+  };
+
   const handleMusicSelection = (
     event: React.MouseEvent<HTMLIonItemElement, MouseEvent>,
     { name, id, beats }: Song
   ): void => {
     setShowModal(true);
-    console.log(event.target)
+    // console.log(showModal)
     // let id = event.currentTarget.key
-    console.log(id, name, beats);
+    // console.log(id, name, beats);
+    // setBeatIndex(0)
+    beatIndex = 0;
     // let songName = event.currentTarget.getAttribute("data-name") || "";
-    setCurrentSong({ name, id, beats });
-    setSongs([...songs])
+    // setCurrentSong({ name, id, beats });
+    console.log("current song set", currentSong);
+    setSongs([...songs]);
+    Tone.Transport.start();
+    playSong(beats)
+    // Tone.Transport.scheduleRepeat(playSong, "1n");
   };
   return (
     <IonPage>
@@ -83,6 +142,7 @@ const Tab2: React.FC = () => {
           isOpen={showModal}
           swipeToClose={true}
           onDidDismiss={() => setShowModal(false)}
+          mode="ios"
         >
           <IonCard className="ion-text-center">
             <IonToolbar>
@@ -142,6 +202,7 @@ const Tab2: React.FC = () => {
           <IonCardContent>
             <IonSegment
               value="am"
+              mode="ios"
               onIonChange={(e) =>
                 console.log("Segment selected", e.detail.value)
               }
@@ -158,7 +219,7 @@ const Tab2: React.FC = () => {
             </IonSegment>
           </IonCardContent>
         </IonCard>
-        <IonCard >
+        <IonCard>
           <IonList>
             <IonListHeader>Saved entries</IonListHeader>
 
@@ -167,21 +228,23 @@ const Tab2: React.FC = () => {
                 <IonItem
                   key={song.id}
                   data-name={song.name}
-                  onClick={(e) => handleMusicSelection(e, song)}
+                  onClick={(e) => {handleMusicSelection(e, song); setCurrentSong(song)}}
                 >
                   <IonLabel>
                     <h2>{song.name}</h2>
                     <IonGrid>
                       <IonRow className="beats-indicator ion-align-items-end">
-
-                      {song.beats.map((beat) => (
-                        <IonCol color="tertiary" style={{height: beat/3}}></IonCol>
+                        {song.beats.map((beat, index) => (
+                          <IonCol
+                            key={song.id + index}
+                            color="tertiary"
+                            style={{ height: beat / 3 }}
+                          ></IonCol>
                         ))}
-                        </IonRow>
-                  </IonGrid>
+                      </IonRow>
+                    </IonGrid>
                   </IonLabel>
                   <IonIcon slot="start" icon={playOutline} />
-                  
                 </IonItem>
               );
             })}

@@ -15,6 +15,7 @@ import {
   IonIcon,
   IonToast,
   IonBadge,
+  IonProgressBar,
 } from "@ionic/react";
 
 // import ExploreContainer from "../components/ExploreContainer";
@@ -195,6 +196,7 @@ const Tab1: React.FC = () => {
           </IonCardHeader>
           <IonCardContent>
           <IonBadge color="warning">{hrValue} bpm</IonBadge>
+          <IonProgressBar value={(hrValue - 40)/160}></IonProgressBar>
           </IonCardContent>
         </IonCard>
       </IonContent>
