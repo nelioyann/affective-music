@@ -38,6 +38,7 @@ import * as Tone from "tone";
 
 const Tab2: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
+  const [currentSynth, setCurrentSynth] = useState("0")
   const [currentSong, setCurrentSong] = useState<Song>({
     name: "",
     beats: [],
@@ -45,9 +46,11 @@ const Tab2: React.FC = () => {
   });
   var beatIndex = 0;
 
-  const synth = new Tone.MembraneSynth().toDestination();
-  // const am_synth = new Tone.Synth().toDestination();
-  // const fm_synth = new Tone.Synth().toDestination();
+  const membrane = new Tone.MembraneSynth().toDestination();
+  const am = new Tone.Synth().toDestination();
+  const fm = new Tone.Synth().toDestination();
+
+  const synth = [am, fm,membrane]
 
   interface Song {
     name: string;
@@ -80,7 +83,7 @@ const Tab2: React.FC = () => {
   // }
 
   const playSong = (beats: number[]): void => {
-    
+
     let interval = "4n";
     let index = 0;
     let iterations = 32;
@@ -91,11 +94,11 @@ const Tab2: React.FC = () => {
 
     const repeat = () =>{
       console.log("repeat triggered", index)
-      synth.triggerAttackRelease(beats[index%4], "8n");
+      synth[parseInt(currentSynth)].triggerAttackRelease(beats[index%4], "8n");
       
       console.log(index%8)
       index++
-      if (index >= iterations) loop.dispose()
+      if (index >= iterations) {loop.dispose(); Tone.Transport.stop()}
     }
     console.log();
     // console.log(beatIndex);
@@ -141,7 +144,7 @@ const Tab2: React.FC = () => {
         <IonModal
           isOpen={showModal}
           swipeToClose={true}
-          onDidDismiss={() => setShowModal(false)}
+          onDidDismiss={() => {setShowModal(false); Tone.Transport.stop()}}
           mode="ios"
         >
           <IonCard className="ion-text-center">
@@ -201,19 +204,19 @@ const Tab2: React.FC = () => {
           </IonCardHeader>
           <IonCardContent>
             <IonSegment
-              value="am"
+              value={currentSynth}
               mode="ios"
               onIonChange={(e) =>
-                console.log("Segment selected", e.detail.value)
+                setCurrentSynth(e.detail.value || "0")
               }
             >
-              <IonSegmentButton value="am">
+              <IonSegmentButton value="0">
                 <IonLabel>AM</IonLabel>
               </IonSegmentButton>
-              <IonSegmentButton value="fm">
+              <IonSegmentButton value="1">
                 <IonLabel>FM</IonLabel>
               </IonSegmentButton>
-              <IonSegmentButton value="membrane">
+              <IonSegmentButton value="2">
                 <IonLabel>Membrane</IonLabel>
               </IonSegmentButton>
             </IonSegment>
