@@ -5,7 +5,7 @@ import './Tab3.css';
 const Tab3: React.FC = () => {
 
   const slideOpts = {
-    initialSlide: 1,
+    initialSlide: 0,
     speed: 400
   };
   return (
