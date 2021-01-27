@@ -46,8 +46,8 @@ const Tab2: React.FC = () => {
   });
 
   const membrane = new Tone.MembraneSynth().toDestination();
-  const am = new Tone.Synth().toDestination();
-  const fm = new Tone.Synth().toDestination();
+  const am = new Tone.AMSynth().toDestination();
+  const fm = new Tone.FMSynth().toDestination();
 
   const synth = [am, fm,membrane]
 
@@ -60,12 +60,12 @@ const Tab2: React.FC = () => {
   const [songs, setSongs] = useState<Song[]>([
     {
       name: "Crescendo",
-      beats: [70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120],
+      beats: [ 45,50,55,60,65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120],
       id: 20200125124400,
     },
     {
       name: "Diminuendo",
-      beats: [120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70],
+      beats: [120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45],
       id: 20200125124401,
     },
   ]);
@@ -74,9 +74,9 @@ const Tab2: React.FC = () => {
 
   const playSong = (beats: number[]): void => {
 
-    let interval = "4n";
+    let interval = "8n";
     let index = 0;
-    let iterations = 32;
+    let iterations = 24;
 
     let loop = new Tone.Loop();
 
@@ -123,6 +123,7 @@ const Tab2: React.FC = () => {
         <IonModal
           isOpen={showModal}
           swipeToClose={true}
+          cssClass="player-modal"
           onDidDismiss={() => {setShowModal(false); Tone.Transport.stop()}}
           mode="ios"
         >
@@ -203,7 +204,7 @@ const Tab2: React.FC = () => {
         </IonCard>
         <IonCard>
           <IonList>
-            <IonListHeader>Saved entries</IonListHeader>
+            <IonListHeader>Saved Tracks</IonListHeader>
 
             {songs.map((song) => {
               return (
@@ -213,6 +214,10 @@ const Tab2: React.FC = () => {
                   onClick={(e) => {handleMusicSelection(e, song); setCurrentSong(song)}}
                 >
                   <IonLabel>
+                    <IonThumbnail>
+              <img src="./assets/logo.png" alt="" />
+
+                    </IonThumbnail>
                     <h2>{song.name}</h2>
                     <IonGrid>
                       <IonRow className="beats-indicator ion-align-items-end">
@@ -226,7 +231,7 @@ const Tab2: React.FC = () => {
                       </IonRow>
                     </IonGrid>
                   </IonLabel>
-                  <IonIcon slot="start" icon={playOutline} />
+                  {/* <IonIcon slot="start" icon={playOutline} /> */}
                 </IonItem>
               );
             })}
