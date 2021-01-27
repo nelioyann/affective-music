@@ -16,11 +16,14 @@ import {
   IonToast,
   IonBadge,
   IonProgressBar,
+  IonButtons,
+  IonFab,
+  IonFabButton,
 } from "@ionic/react";
 
 // import ExploreContainer from "../components/ExploreContainer";
 import "./Tab1.css";
-import { bluetooth, logOutOutline } from "ionicons/icons";
+import { add, bluetooth, logOutOutline } from "ionicons/icons";
 
 
 
@@ -180,14 +183,17 @@ const Tab1: React.FC = () => {
             Record your heart beats, choose the right music synthetiser for you and listen to the resulting song.
             All recordings are saved locally.
           </IonCardContent>
-          <IonButton  disabled={!bleAvailability || isPaired} onClick={() => connect_miband()}>
-            Pair Device
-            <IonIcon icon={bluetooth} />
+          <div className="ion-padding">
+
+          <IonButton  fill="clear"  disabled={!bleAvailability || isPaired} onClick={() => connect_miband()}>
+            Pair 
+            <IonIcon slot="start" icon={bluetooth} />
           </IonButton>
-          <IonButton  disabled={true} onClick={() => disconnect_miband()}>
-            UnPair Device
+          <IonButton  disabled={false} onClick={() => disconnect_miband()}>
+            UnPair 
             <IonIcon icon={logOutOutline} />
           </IonButton>
+          </div>
         </IonCard>
         <IonCard>
           <IonCardHeader>
@@ -199,6 +205,11 @@ const Tab1: React.FC = () => {
           <IonProgressBar value={(hrValue - 40)/160}></IonProgressBar>
           </IonCardContent>
         </IonCard>
+        <IonFab vertical="bottom" horizontal="center" slot="fixed">
+          <IonFabButton>
+            <IonIcon icon={add} />
+          </IonFabButton>
+        </IonFab>
       </IonContent>
     </IonPage>
   );

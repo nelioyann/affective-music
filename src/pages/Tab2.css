@@ -8,6 +8,13 @@ ion-label{
     margin: 10px auto;
 }
 
+.player-modal .modal-wrapper ion-page{
+    justify-content: space-around;
+}
+.tracks ion-thumbnail{
+    --border-radius: 5px ;
+}
+
 .beats-indicator ion-col{
     background-color: var(--ion-color-primary)	;
 }

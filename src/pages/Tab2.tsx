@@ -38,18 +38,18 @@ import * as Tone from "tone";
 
 const Tab2: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
-  const [currentSynth, setCurrentSynth] = useState("0")
+  const [currentSynth, setCurrentSynth] = useState("0");
   const [currentSong, setCurrentSong] = useState<Song>({
     name: "",
     beats: [],
-    id: 0
+    id: 0,
   });
 
   const membrane = new Tone.MembraneSynth().toDestination();
   const am = new Tone.AMSynth().toDestination();
   const fm = new Tone.FMSynth().toDestination();
 
-  const synth = [am, fm,membrane]
+  const synth = [am, fm, membrane];
 
   interface Song {
     name: string;
@@ -60,43 +60,82 @@ const Tab2: React.FC = () => {
   const [songs, setSongs] = useState<Song[]>([
     {
       name: "Crescendo",
-      beats: [ 45,50,55,60,65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120],
+      beats: [
+        45,
+        50,
+        55,
+        60,
+        65,
+        70,
+        75,
+        80,
+        85,
+        90,
+        95,
+        100,
+        105,
+        110,
+        115,
+        120,
+      ],
       id: 20200125124400,
     },
     {
       name: "Diminuendo",
-      beats: [120, 115, 110, 105, 100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45],
+      beats: [
+        120,
+        115,
+        110,
+        105,
+        100,
+        95,
+        90,
+        85,
+        80,
+        75,
+        70,
+        65,
+        60,
+        55,
+        50,
+        45,
+      ],
       id: 20200125124401,
-    },
+    },{
+      name: "Aleatória",
+      beats: [120, 100, 85, 90, 75, 55, 65, 110, 80, 50, 45, 115, 95, 60, 70, 105],
+      id: 20200127103101
+    }
   ]);
 
-
-
   const playSong = (beats: number[]): void => {
-
     let interval = "8n";
     let index = 0;
     let iterations = 24;
 
     let loop = new Tone.Loop();
 
+    const repeat = () => {
+      console.log("repeat triggered", index);
+      synth[parseInt(currentSynth)].triggerAttackRelease(
+        beats[index % 4],
+        "8n"
+      );
 
-    const repeat = () =>{
-      console.log("repeat triggered", index)
-      synth[parseInt(currentSynth)].triggerAttackRelease(beats[index%4], "8n");
-      
-      console.log(index%8)
-      index++
-      if (index >= iterations) {loop.dispose(); Tone.Transport.stop()}
-    }
+      console.log(index % 8);
+      index++;
+      if (index >= iterations) {
+        loop.dispose();
+        Tone.Transport.stop();
+      }
+    };
     // if (beats && beatIndex < beats.length) {
-      loop.iterations = iterations;
-      loop.interval = interval
-      loop.callback = repeat
-      loop.start(0)
+    loop.iterations = iterations;
+    loop.interval = interval;
+    loop.callback = repeat;
+    loop.start(0);
     console.log("beatIndex afeter loop", beats);
-    console.log(loop)
-    
+    console.log(loop);
   };
 
   const handleMusicSelection = (
@@ -108,7 +147,7 @@ const Tab2: React.FC = () => {
     console.log("current song set", currentSong);
     setSongs([...songs]);
     Tone.Transport.start();
-    playSong(beats)
+    playSong(beats);
     // Tone.Transport.scheduleRepeat(playSong, "1n");
   };
   return (
@@ -124,7 +163,10 @@ const Tab2: React.FC = () => {
           isOpen={showModal}
           swipeToClose={true}
           cssClass="player-modal"
-          onDidDismiss={() => {setShowModal(false); Tone.Transport.stop()}}
+          onDidDismiss={() => {
+            setShowModal(false);
+            Tone.Transport.stop();
+          }}
           mode="ios"
         >
           <IonCard className="ion-text-center">
@@ -186,9 +228,7 @@ const Tab2: React.FC = () => {
             <IonSegment
               value={currentSynth}
               mode="ios"
-              onIonChange={(e) =>
-                setCurrentSynth(e.detail.value || "0")
-              }
+              onIonChange={(e) => setCurrentSynth(e.detail.value || "0")}
             >
               <IonSegmentButton value="0">
                 <IonLabel>AM</IonLabel>
@@ -202,7 +242,7 @@ const Tab2: React.FC = () => {
             </IonSegment>
           </IonCardContent>
         </IonCard>
-        <IonCard>
+        <IonCard className="tracks">
           <IonList>
             <IonListHeader>Saved Tracks</IonListHeader>
 
@@ -211,13 +251,15 @@ const Tab2: React.FC = () => {
                 <IonItem
                   key={song.id}
                   data-name={song.name}
-                  onClick={(e) => {handleMusicSelection(e, song); setCurrentSong(song)}}
+                  onClick={(e) => {
+                    handleMusicSelection(e, song);
+                    setCurrentSong(song);
+                  }}
                 >
-                  <IonLabel>
                     <IonThumbnail>
-              <img src="./assets/logo.png" alt="" />
-
+                      <img src="./assets/logo.png" alt="" />
                     </IonThumbnail>
+                  <IonLabel className="ion-padding">
                     <h2>{song.name}</h2>
                     <IonGrid>
                       <IonRow className="beats-indicator ion-align-items-end">
@@ -225,7 +267,7 @@ const Tab2: React.FC = () => {
                           <IonCol
                             key={song.id + index}
                             color="tertiary"
-                            style={{ height: beat / 3 }}
+                            style={{ height: beat / 4 }}
                           ></IonCol>
                         ))}
                       </IonRow>

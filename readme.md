@@ -42,7 +42,7 @@ Just for fun, nothing more, nothing less.
 - [ ] Read heart rate over a specific amount of time
 - [ ] Save the data locally by date/time
 - [ ] Retrieve the data  
-- [ ] Show the data in a playlist 
+- [x] Show the data in a playlist 
 - [x] Play notes associated to each numerical value
 
 ### Player Functionnality
