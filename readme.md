@@ -43,7 +43,7 @@ Just for fun, nothing more, nothing less.
 - [ ] Save the data locally by date/time
 - [ ] Retrieve the data  
 - [ ] Show the data in a playlist 
-- [ ] Play notes associated to each numerical value
+- [x] Play notes associated to each numerical value
 
 ### Player Functionnality
 
