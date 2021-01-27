@@ -2,7 +2,7 @@ ion-label{
     flex: none;
 }
 
-ion-thumbnail{
+.player-modal ion-thumbnail{
     --size: 150px;
     --border-radius: 5px;
     margin: 10px auto;

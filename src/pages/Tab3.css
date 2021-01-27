@@ -11,8 +11,9 @@ ion-slides {
 
   .swiper-slide img {
     /* max-height: 30%; */
+    width: clamp(120px, 40vh,200px);
     max-width: 200px;
-    margin: 60px 0 40px;
+    margin: 1em 0 0.8em;
     pointer-events: none;
   }
 
@@ -21,4 +22,8 @@ ion-slides {
     font-size: 14px;
     line-height: 1.5;
     color: var(--ion-color-step-600, #60646b);
+  }
+
+  .swiper-pagination-bullet{
+    opacity: 0.5;
   }
