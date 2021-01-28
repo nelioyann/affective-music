@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   IonButton,
+  IonCard,
+  IonCardContent,
+  IonCardTitle,
   IonContent,
   IonHeader,
+  IonModal,
   IonPage,
   IonSlide,
   IonSlides,
@@ -16,6 +20,8 @@ const Tab3: React.FC = () => {
     initialSlide: 0,
     speed: 400,
   };
+
+  const [showInfoModal, setShowInfoModal] = useState(false);
   return (
     <IonPage>
       <IonHeader>
@@ -24,6 +30,37 @@ const Tab3: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+        <IonModal isOpen={showInfoModal}>
+          <IonCard>
+            <IonHeader>
+              <IonCardTitle>About HeartBeats</IonCardTitle>
+            </IonHeader>
+
+            <IonCardContent>Heartbeats</IonCardContent>
+          </IonCard>
+
+
+          <IonCard>
+            <IonHeader>
+              <IonCardTitle>How does it work</IonCardTitle>
+            </IonHeader>
+
+            <IonCardContent>Heartbeats</IonCardContent>
+          </IonCard>
+          <IonCard>
+            <IonHeader>
+              <IonCardTitle>What do I need</IonCardTitle>
+            </IonHeader>
+
+            <IonCardContent>You will need a phone with a modern browser that supports the Web
+            Bluetooth API.</IonCardContent>
+          </IonCard>
+          
+
+          <IonButton onClick={() => setShowInfoModal(false)}>
+            Close Info
+          </IonButton>
+        </IonModal>
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">Info</IonTitle>
@@ -54,8 +91,15 @@ const Tab3: React.FC = () => {
             <div>
               <img src="./assets/logo.png" alt="Logo" />
               <h3>Pair your device and record </h3>
-              <p>Pair your device and record a sample of beats. Then listen to your tracks in the resulting playlist.</p>
-              <IonButton style={{borderRadius: "5px"}} color="secondary">
+              <p>
+                Pair your device and record a sample of beats. Then listen to
+                your tracks in the resulting playlist.
+              </p>
+              <IonButton
+                onClick={() => setShowInfoModal(true)}
+                style={{ borderRadius: "5px" }}
+                color="primary"
+              >
                 Learn More
               </IonButton>
             </div>

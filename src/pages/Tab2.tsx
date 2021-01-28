@@ -31,7 +31,6 @@ import {
 import "./Tab2.css";
 import {
   chevronDownOutline,
-  pauseOutline,
   playOutline,
   stopOutline,
   volumeMuteOutline,
@@ -130,17 +129,18 @@ const Tab2: React.FC = () => {
 
     const synth = [am, fm, membrane];
     // higher number reduce interval
-    let interval = "12n";
+    let interval = "14n";
     let iterations = beats.length * 2;
     // Duration of notes, smaller values produce longer sound
     let amplitude = "16n";
     // How many notes are played from the beats
-    let notes = 0 || beats.length;
+    let notes = 4 || beats.length;
 
     let loop = new Tone.Loop();
     let index = 0;
     const repeat = () => {
       // console.log("repeat triggered", index/(iterations - 1));
+      // console.log(Math.abs(((index+1) % notes) * notes - 1))
       synth[parseInt(currentSynth)].triggerAttackRelease(
         beats[index % notes],
         amplitude
