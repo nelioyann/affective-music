@@ -18,7 +18,8 @@ import {
   IonListHeader,
   IonModal,
   IonPage,
-  IonRange,
+  IonProgressBar,
+  
   IonRow,
   IonSegment,
   IonSegmentButton,
@@ -33,23 +34,19 @@ import {
   pauseOutline,
   playOutline,
   stopOutline,
+  volumeMuteOutline,
 } from "ionicons/icons";
 import * as Tone from "tone";
 
 const Tab2: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
-  const [currentSynth, setCurrentSynth] = useState("0");
+  // const [songProgression, setSongProgression] = useState<number>(0);
+  const [currentSynth, setCurrentSynth] = useState("1");
   const [currentSong, setCurrentSong] = useState<Song>({
     name: "",
     beats: [],
     id: 0,
   });
-
-  const membrane = new Tone.MembraneSynth().toDestination();
-  const am = new Tone.AMSynth().toDestination();
-  const fm = new Tone.FMSynth().toDestination();
-
-  const synth = [am, fm, membrane];
 
   interface Song {
     name: string;
@@ -101,32 +98,64 @@ const Tab2: React.FC = () => {
         45,
       ],
       id: 20200125124401,
-    },{
+    },
+    {
       name: "Aleatória",
-      beats: [120, 100, 85, 90, 75, 55, 65, 110, 80, 50, 45, 115, 95, 60, 70, 105],
-      id: 20200127103101
-    }
+      beats: [
+        120,
+        100,
+        85,
+        90,
+        75,
+        55,
+        65,
+        110,
+        80,
+        50,
+        45,
+        115,
+        95,
+        60,
+        70,
+        105,
+      ],
+      id: 20200127103101,
+    },
   ]);
 
   const playSong = (beats: number[]): void => {
-    let interval = "8n";
-    let index = 0;
-    let iterations = 24;
+    const membrane = new Tone.MembraneSynth().toDestination();
+    const am = new Tone.AMSynth().toDestination();
+    const fm = new Tone.FMSynth().toDestination();
+
+    const synth = [am, fm, membrane];
+    // higher number reduce interval
+    let interval = "12n";
+    let iterations = beats.length * 2;
+    // Duration of notes, smaller values produce longer sound
+    let amplitude = "16n";
+    // How many notes are played from the beats
+    let notes = 0 || beats.length;
 
     let loop = new Tone.Loop();
-
+    let index = 0;
     const repeat = () => {
-      console.log("repeat triggered", index);
+      // console.log("repeat triggered", index/(iterations - 1));
       synth[parseInt(currentSynth)].triggerAttackRelease(
-        beats[index % 4],
-        "8n"
+        beats[index % notes],
+        amplitude
       );
 
-      console.log(index % 8);
+      // console.log(index % 8);
       index++;
+      // setSongProgression(parseFloat((index/iterations).toFixed(2)))
       if (index >= iterations) {
+        // setSongProgression(0)
         loop.dispose();
         Tone.Transport.stop();
+        Tone.Transport.cancel();
+        console.log(loop);
+
       }
     };
     // if (beats && beatIndex < beats.length) {
@@ -134,7 +163,7 @@ const Tab2: React.FC = () => {
     loop.interval = interval;
     loop.callback = repeat;
     loop.start(0);
-    console.log("beatIndex afeter loop", beats);
+    console.log("beatIndex after loop", beats);
     console.log(loop);
   };
 
@@ -166,6 +195,7 @@ const Tab2: React.FC = () => {
           onDidDismiss={() => {
             setShowModal(false);
             Tone.Transport.stop();
+            Tone.Transport.cancel();
           }}
           mode="ios"
         >
@@ -187,9 +217,13 @@ const Tab2: React.FC = () => {
             </IonCardHeader>
             <IonCardContent>
               <IonItem>
-                <IonLabel slot="start">00:00</IonLabel>
-                <IonRange></IonRange>
-                <IonLabel slot="end">00:00</IonLabel>
+                {/* <IonLabel slot="start"></IonLabel> */}
+                <IonProgressBar
+                  color="primary"
+                  type="indeterminate"
+                  value={1}
+                ></IonProgressBar>
+                {/* <IonLabel slot="end">00:00</IonLabel> */}
               </IonItem>
 
               {/* Play Button */}
@@ -199,7 +233,7 @@ const Tab2: React.FC = () => {
 
               {/* Pause Button */}
               <IonButton fill="clear" mode="ios">
-                <IonIcon icon={pauseOutline} />
+                <IonIcon icon={volumeMuteOutline} />
               </IonButton>
 
               {/* Stop Button */}
@@ -256,9 +290,9 @@ const Tab2: React.FC = () => {
                     setCurrentSong(song);
                   }}
                 >
-                    <IonThumbnail>
-                      <img src="./assets/logo.png" alt="" />
-                    </IonThumbnail>
+                  <IonThumbnail>
+                    <img src="./assets/logo.png" alt="" />
+                  </IonThumbnail>
                   <IonLabel className="ion-padding">
                     <h2>{song.name}</h2>
                     <IonGrid>

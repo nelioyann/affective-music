@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  IonButton,
   IonContent,
   IonHeader,
   IonPage,
@@ -54,6 +55,9 @@ const Tab3: React.FC = () => {
               <img src="./assets/logo.png" alt="Logo" />
               <h3>Pair your device and record </h3>
               <p>Pair your device and record a sample of beats. Then listen to your tracks in the resulting playlist.</p>
+              <IonButton style={{borderRadius: "5px"}} color="secondary">
+                Learn More
+              </IonButton>
             </div>
           </IonSlide>
         </IonSlides>

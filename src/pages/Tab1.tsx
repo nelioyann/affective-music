@@ -16,20 +16,18 @@ import {
   IonToast,
   IonBadge,
   IonProgressBar,
-  IonButtons,
   IonFab,
   IonFabButton,
 } from "@ionic/react";
 
 // import ExploreContainer from "../components/ExploreContainer";
 import "./Tab1.css";
-import { add, bluetooth, logOutOutline } from "ionicons/icons";
+import { bluetooth, logOutOutline, radioButtonOn } from "ionicons/icons";
 
 
 
 const Tab1: React.FC = () => {
 
-  const synth = new Tone.Synth().toDestination();
   // let mobileNavigatorObject: any = window.navigator;
 
   const [bleAvailability, setbleAvailability] = useState(false);
@@ -37,6 +35,7 @@ const Tab1: React.FC = () => {
   const [hrValue, setHrValue] = useState(0);
 
   const [pairedToast, setPairedToast] = useState(false);
+  const [disconnectedToast, setDisconnectedToast] = useState(false);
 
   useEffect(()=>{
     checkBlAvailability()
@@ -59,6 +58,8 @@ const Tab1: React.FC = () => {
   const handleHeartbeatChange = (event: Event) => {
     // console.log(event)
     // let {target} = event;
+  const synth = new Tone.Synth().toDestination();
+
     // As input element otherwise the value can't be retrieved
     let target = event.target as HTMLInputElement;
     let value = target.value as unknown as DataView;
@@ -135,6 +136,7 @@ const Tab1: React.FC = () => {
       if(device.gatt.connected) device.gatt.disconnect();
       // TODO add a notification
       setIsPaired(false)
+      setDisconnectedToast(true)
       console.log("device disconnected")
     }
   }
@@ -152,11 +154,11 @@ const Tab1: React.FC = () => {
         message="Device pairedToast"
         duration={500}
       />
-      {/* <IonToast
-        isOpen={!isPaired}
-        message="Device not paired"
-        duration={500}
-      /> */}
+      <IonToast
+        isOpen={disconnectedToast}
+        message="Device disconnected"
+        duration={800}
+      />
 
 
         <IonHeader collapse="condense">
@@ -185,11 +187,11 @@ const Tab1: React.FC = () => {
           </IonCardContent>
           <div className="ion-padding">
 
-          <IonButton  fill="clear"  disabled={!bleAvailability || isPaired} onClick={() => connect_miband()}>
+          <IonButton  fill="outline"  disabled={!bleAvailability || isPaired} onClick={() => connect_miband()}>
             Pair 
             <IonIcon slot="start" icon={bluetooth} />
           </IonButton>
-          <IonButton  disabled={false} onClick={() => disconnect_miband()}>
+          <IonButton  fill="clear" disabled={false} onClick={() => disconnect_miband()}>
             UnPair 
             <IonIcon icon={logOutOutline} />
           </IonButton>
@@ -207,7 +209,7 @@ const Tab1: React.FC = () => {
         </IonCard>
         <IonFab vertical="bottom" horizontal="center" slot="fixed">
           <IonFabButton>
-            <IonIcon icon={add} />
+            <IonIcon icon={radioButtonOn} />
           </IonFabButton>
         </IonFab>
       </IonContent>

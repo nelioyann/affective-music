@@ -27,3 +27,7 @@ ion-slides {
   .swiper-pagination-bullet{
     opacity: 0.5;
   }
+
+  ion-button{
+    --border-radius: 5px;
+  }
