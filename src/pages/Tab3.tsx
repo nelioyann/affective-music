@@ -30,7 +30,7 @@ const Tab3: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonModal isOpen={showInfoModal}>
+        <IonModal isOpen={showInfoModal} swipeToClose={true}>
           <IonCard>
             <IonHeader>
               <IonCardTitle>About HeartBeats</IonCardTitle>

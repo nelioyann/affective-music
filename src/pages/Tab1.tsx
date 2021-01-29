@@ -18,11 +18,16 @@ import {
   IonProgressBar,
   IonFab,
   IonFabButton,
+  IonModal,
+  IonButtons,
+  IonGrid,
+  IonRow,
+  IonCol,
 } from "@ionic/react";
 
 // import ExploreContainer from "../components/ExploreContainer";
 import "./Tab1.css";
-import { bluetooth, logOutOutline, radioButtonOn } from "ionicons/icons";
+import { bluetooth, chevronDownOutline, logOutOutline, radioButtonOn } from "ionicons/icons";
 
 
 
@@ -33,6 +38,9 @@ const Tab1: React.FC = () => {
   const [bleAvailability, setbleAvailability] = useState(false);
   const [isPaired, setIsPaired] = useState(false);
   const [hrValue, setHrValue] = useState(0);
+  const [recordModal, setRecordModal] = useState(false)
+  const [newRecording, setNewRecording] = useState<number[]>([])
+  const [queryUnpair, setQueryUnpair] = useState(false)
 
   const [pairedToast, setPairedToast] = useState(false);
   const [disconnectedToast, setDisconnectedToast] = useState(false);
@@ -41,8 +49,23 @@ const Tab1: React.FC = () => {
     checkBlAvailability()
   }, [bleAvailability])
 
+  useEffect(()=>{
+    console.log("it changed")
+    if ((newRecording.length <16) && (hrValue != 0)){
+      setNewRecording([...newRecording, hrValue])
+      console.log("please ", device)
+    }
+
+  }, [hrValue])
+
+  useEffect(()=>{
+    console.log("it changed", newRecording)
+    // setNewRecording([...newRecording, hrValue])
+
+  }, [newRecording])
 
   var device: BluetoothDevice;
+  // var server: any;
   
   // Checks if BLE pairing is supported
   const checkBlAvailability = async () => {
@@ -56,15 +79,19 @@ const Tab1: React.FC = () => {
   };
 
   const handleHeartbeatChange = (event: Event) => {
-    // console.log(event)
+    console.log(queryUnpair)
     // let {target} = event;
+    if (queryUnpair){
+      device?.gatt?.disconnect()
+      return null
+    }
   const synth = new Tone.Synth().toDestination();
 
     // As input element otherwise the value can't be retrieved
     let target = event.target as HTMLInputElement;
     let value = target.value as unknown as DataView;
     // console.log(value)
-
+    // console.log("device",device)
     // let value = target?.value;
     // console.log(value)
     // if(target && target.value)
@@ -73,9 +100,18 @@ const Tab1: React.FC = () => {
       a.push("0x" + ("00" + value.getUint8(i).toString(16)).slice(-2));
     }
     let currentBpm = parseInt(a.join(" ").slice(-4));
-    console.log(currentBpm)
+    // console.log(currentBpm)
     synth.triggerAttackRelease(currentBpm*10, "4n")
     setHrValue(currentBpm)
+    let test = [...newRecording]
+    test.push(currentBpm)
+    // console.log([...newRecording, currentBpm])
+    // setNewRecording(test)
+
+    // if(recordModal){
+    // }
+
+    
 
     // As long as the lenght isn't reached add values
     // if (heartRateValues.length < maxLenght){
@@ -97,6 +133,7 @@ const Tab1: React.FC = () => {
         // Here write your logic of mobileNavigatorObject.bluetooth.requestDevice();
         // Connect device
         device = await navigator.bluetooth.requestDevice(options);
+        // device = BTdevice;
         console.log("Connect Miband - Device retrieved", device);
         
         const server = await device.gatt?.connect();
@@ -127,20 +164,25 @@ const Tab1: React.FC = () => {
     
   };
 
-  const disconnect_miband = () =>{
-    console.log("Bug")
+  const disconnect_miband = async () =>{
+    console.log("I wish to disconnect")
+    // navigator.bluetooth.getDevices()
     // if (!device) return;
-    console.log(device?.gatt?.connected)
-    if(device && device?.gatt){
-      console.log("disconnecting device")
-      if(device.gatt.connected) device.gatt.disconnect();
-      // TODO add a notification
-      setIsPaired(false)
-      setDisconnectedToast(true)
-      console.log("device disconnected")
-    }
+    // let temp_devices = await Bluetooth.getDevices();
+    // console.log(server)
+    // if(device && device?.gatt){
+    //   console.log("disconnecting device")
+    //   if(device.gatt.connected) device.gatt.disconnect();
+    //   // TODO add a notification
+    //   setIsPaired(false)
+    //   setDisconnectedToast(true)
+    //   console.log("device disconnected")
+    // }
   }
 
+  const handleRecording = () =>{
+
+  }
   return (
     <IonPage>
       <IonHeader>
@@ -160,6 +202,28 @@ const Tab1: React.FC = () => {
         duration={800}
       />
 
+      <IonModal isOpen={recordModal} onDidDismiss={()=>setRecordModal(false)} swipeToClose={true} mode="ios">
+      <IonToolbar>
+              <IonButtons slot="end">
+                <IonButton onClick={() => setRecordModal(false)}>
+                  <IonIcon icon={chevronDownOutline} /> Close this
+                </IonButton>
+              </IonButtons>
+            </IonToolbar>
+        <IonCard>
+        <h2>Record modal</h2>
+
+        <h2>{hrValue}</h2>
+        <IonGrid>
+          <IonRow>
+            {newRecording.map((beat, index)=> <IonCol key={index}>{beat}</IonCol>)}
+            <IonCol>
+
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+        </IonCard>
+      </IonModal>
 
         <IonHeader collapse="condense">
           <IonToolbar>
@@ -208,7 +272,7 @@ const Tab1: React.FC = () => {
           </IonCardContent>
         </IonCard>
         <IonFab vertical="bottom" horizontal="center" slot="fixed">
-          <IonFabButton>
+          <IonFabButton disabled={!isPaired} onClick={()=> {setRecordModal(true); handleRecording()}}>
             <IonIcon icon={radioButtonOn} />
           </IonFabButton>
         </IonFab>

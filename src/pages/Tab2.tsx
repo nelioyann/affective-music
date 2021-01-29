@@ -199,7 +199,6 @@ const Tab2: React.FC = () => {
           }}
           mode="ios"
         >
-          <IonCard className="ion-text-center">
             <IonToolbar>
               <IonButtons slot="end">
                 <IonButton onClick={() => setShowModal(false)}>
@@ -207,6 +206,7 @@ const Tab2: React.FC = () => {
                 </IonButton>
               </IonButtons>
             </IonToolbar>
+          <IonCard className="ion-text-center">
             <IonThumbnail>
               <img src="./assets/logo.png" alt="" />
             </IonThumbnail>
