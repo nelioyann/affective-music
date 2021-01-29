@@ -59,7 +59,8 @@ const Tab1: React.FC = () => {
     if (newRecording.length < 16 && hrValue !== 0) {
       setNewRecording(newRecording => [...newRecording, hrValue]);
     }
-  }, [hrValue, newRecording.length]);
+    // eslint-disable-next-line
+  }, [hrValue]);
 
   useEffect(() => {
     // console.log("it changed", song);
