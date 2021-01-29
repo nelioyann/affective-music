@@ -26,10 +26,10 @@ Just for fun, nothing more, nothing less.
 ## Next Steps
 
 
-- [ ] Deploy MVP 
+- [x] Deploy MVP 
 - [x] Test bluetooth connection
 - [x] Add guidelines
-- [ ] Styling
+- [x] Styling
 
 # SEO
 - [ ] Add Robot.txt
@@ -39,11 +39,12 @@ Just for fun, nothing more, nothing less.
 
 ### Playlist Functionnality
 
-- [ ] Read heart rate over a specific amount of time
-- [ ] Save the data locally by date/time
-- [ ] Retrieve the data  
+- [x] Read heart rate over a specific amount of time
+- [x] Save the data locally by date/time
+- [x] Retrieve the data  
 - [x] Show the data in a playlist 
 - [x] Play notes associated to each numerical value
+- [ ] Delete entries
 
 ### Player Functionnality
 
