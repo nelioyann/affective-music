@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import * as Tone from 'tone';
+// import * as Tone from "tone";
 import {
   IonContent,
   IonHeader,
@@ -20,58 +20,65 @@ import {
   IonFabButton,
   IonModal,
   IonButtons,
-  IonGrid,
-  IonRow,
-  IonCol,
 } from "@ionic/react";
 
 // import ExploreContainer from "../components/ExploreContainer";
 import "./Tab1.css";
-import { bluetooth, chevronDownOutline, logOutOutline, radioButtonOn } from "ionicons/icons";
-
-
+import {
+  bluetooth,
+  chevronDownOutline,
+  logOutOutline,
+  radioButtonOn,
+} from "ionicons/icons";
 
 const Tab1: React.FC = () => {
-
   // let mobileNavigatorObject: any = window.navigator;
+  interface Song {
+    name: string;
+    beats: number[];
+    id: number;
+  }
 
   const [bleAvailability, setbleAvailability] = useState(false);
   const [isPaired, setIsPaired] = useState(false);
   const [hrValue, setHrValue] = useState(0);
-  const [recordModal, setRecordModal] = useState(false)
-  const [newRecording, setNewRecording] = useState<number[]>([])
-  const [queryUnpair, setQueryUnpair] = useState(false)
+  const [recordModal, setRecordModal] = useState(false);
+  const [newRecording, setNewRecording] = useState<number[]>([]);
+  const [song, setSong] = useState<Song>()
 
   const [pairedToast, setPairedToast] = useState(false);
   const [disconnectedToast, setDisconnectedToast] = useState(false);
+  const [device, setDevice] = useState<any>()
 
-  useEffect(()=>{
-    checkBlAvailability()
-  }, [bleAvailability])
+  useEffect(() => {
+    checkBlAvailability();
+  }, [bleAvailability]);
 
-  useEffect(()=>{
-    console.log("it changed")
-    if ((newRecording.length <16) && (hrValue != 0)){
-      setNewRecording([...newRecording, hrValue])
-      console.log("please ", device)
+  useEffect(() => {
+    // console.log("it changed");
+    if (newRecording.length < 16 && hrValue !== 0) {
+      setNewRecording(newRecording => [...newRecording, hrValue]);
     }
+  }, [hrValue, newRecording.length]);
 
-  }, [hrValue])
-
-  useEffect(()=>{
-    console.log("it changed", newRecording)
+  useEffect(() => {
+    // console.log("it changed", song);
+    if (song){
+      const localData = localStorage.getItem("heartbeats");
+      let data =  localData ? JSON.parse(localData) : []
+      data.push(song)
+      localStorage.setItem("heartbeats", JSON.stringify(data))
+    }
     // setNewRecording([...newRecording, hrValue])
+  }, [song]);
 
-  }, [newRecording])
-
-  var device: BluetoothDevice;
   // var server: any;
-  
+
   // Checks if BLE pairing is supported
   const checkBlAvailability = async () => {
     try {
       const isBluetoothAvailable = await navigator.bluetooth.getAvailability();
-      console.log("check ble a ");
+      // console.log("check ble a ");
       setbleAvailability(isBluetoothAvailable);
     } catch (error) {
       console.log("Argh! " + error);
@@ -79,17 +86,15 @@ const Tab1: React.FC = () => {
   };
 
   const handleHeartbeatChange = (event: Event) => {
-    console.log(queryUnpair)
     // let {target} = event;
-    if (queryUnpair){
-      device?.gatt?.disconnect()
-      return null
-    }
-  const synth = new Tone.Synth().toDestination();
+    // if (queryUnpair) {
+    //   device?.gatt?.disconnect();
+    //   return null;
+    // }
 
     // As input element otherwise the value can't be retrieved
     let target = event.target as HTMLInputElement;
-    let value = target.value as unknown as DataView;
+    let value = (target.value as unknown) as DataView;
     // console.log(value)
     // console.log("device",device)
     // let value = target?.value;
@@ -101,28 +106,24 @@ const Tab1: React.FC = () => {
     }
     let currentBpm = parseInt(a.join(" ").slice(-4));
     // console.log(currentBpm)
-    synth.triggerAttackRelease(currentBpm*10, "4n")
-    setHrValue(currentBpm)
-    let test = [...newRecording]
-    test.push(currentBpm)
+    // synth.triggerAttackRelease(currentBpm * 10, "4n");
+    setHrValue(currentBpm);
+    let test = [...newRecording];
+    test.push(currentBpm);
     // console.log([...newRecording, currentBpm])
     // setNewRecording(test)
 
     // if(recordModal){
     // }
 
-    
-
     // As long as the lenght isn't reached add values
     // if (heartRateValues.length < maxLenght){
-      // document.querySelector(".heart-rates .grid").innerHTML += `<button>${currentBpm}</button>`;
-      // heartRateValues.push(currentBpm)
+    // document.querySelector(".heart-rates .grid").innerHTML += `<button>${currentBpm}</button>`;
+    // heartRateValues.push(currentBpm)
     // }
-
-
   };
 
-  const connect_miband = async () => {
+  const connect_miband = () => {
     try {
       const options = {
         filters: [{ namePrefix: "Mi Smart Band" }],
@@ -132,57 +133,68 @@ const Tab1: React.FC = () => {
       if (window.navigator && window.navigator.bluetooth) {
         // Here write your logic of mobileNavigatorObject.bluetooth.requestDevice();
         // Connect device
-        device = await navigator.bluetooth.requestDevice(options);
-        // device = BTdevice;
-        console.log("Connect Miband - Device retrieved", device);
-        
-        const server = await device.gatt?.connect();
-        console.log("Connect Miband - Server retrieved");
-        
-        // Get Herat Rate data
-        const service = await server?.getPrimaryService("heart_rate");
-        console.log("Connect Miband - Service retrieved");
-        const characteristic = await service?.getCharacteristic(
-          "heart_rate_measurement"
-          );
-          console.log("Connect Miband - Characteristic retrieved");
+        navigator.bluetooth.requestDevice(options).then((BTdevice) => {
+          setDevice(BTdevice);
+          console.log("Connect Miband - Device retrieved", BTdevice);
+          BTdevice.gatt?.connect().then((server) => {
+            console.log("Connect Miband - Server retrieved");
+            // Get Herat Rate data
+            server?.getPrimaryService("heart_rate").then((service) => {
+              console.log("Connect Miband - Service retrieved");
+              service
+                ?.getCharacteristic("heart_rate_measurement")
+                .then((characteristic) => {
+                  console.log("Connect Miband - Characteristic retrieved");
 
-        // Listen to changes on the device
-        await characteristic?.startNotifications();
-        console.log("seems to work");
-        setIsPaired(true)
-        setPairedToast(true)
-        characteristic?.addEventListener(
-          "characteristicvaluechanged",
-          handleHeartbeatChange
-        );
+                  characteristic?.startNotifications();
+                  console.log("seems to work");
+                  setIsPaired(true);
+                  setPairedToast(true);
+                  characteristic?.addEventListener(
+                    "characteristicvaluechanged",
+                    handleHeartbeatChange
+                  );
+                });
+            });
+          });
+
+          // Listen to changes on the device
+        });
       }
     } catch (e) {
       console.log(e);
     }
-
-    
   };
 
-  const disconnect_miband = async () =>{
-    console.log("I wish to disconnect")
+  const disconnect_miband =  () => {
+    console.log("I wish to disconnect");
     // navigator.bluetooth.getDevices()
-    // if (!device) return;
-    // let temp_devices = await Bluetooth.getDevices();
+    if (!device) return;
     // console.log(server)
-    // if(device && device?.gatt){
-    //   console.log("disconnecting device")
-    //   if(device.gatt.connected) device.gatt.disconnect();
-    //   // TODO add a notification
-    //   setIsPaired(false)
-    //   setDisconnectedToast(true)
-    //   console.log("device disconnected")
-    // }
-  }
+    if(device && device?.gatt){
+      console.log("disconnecting device")
+      if(device.gatt.connected) device.gatt.disconnect();
+      // TODO add a notification
+      setIsPaired(false)
+      setDisconnectedToast(true)
+      console.log("device disconnected")
+    }
+  };
 
-  const handleRecording = () =>{
-
+  const saveRecording = () =>{
+    console.log("I wish to record");
+    let id = Date.now()
+    let newSong: Song = {
+      name: `Song_${id}`,
+      beats: newRecording,
+      id
+    }
+    setSong(newSong)
+    // Toast Saved
+   
+    // console.table(song)
   }
+  const handleRecording = () => {};
   return (
     <IonPage>
       <IonHeader>
@@ -191,39 +203,53 @@ const Tab1: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-      <IonToast
-        isOpen={pairedToast}
-        message="Device pairedToast"
-        duration={500}
-      />
-      <IonToast
-        isOpen={disconnectedToast}
-        message="Device disconnected"
-        duration={800}
-      />
+        <IonToast
+          isOpen={pairedToast}
+          message="Device paired"
+          duration={500}
+        />
+        <IonToast
+          isOpen={disconnectedToast}
+          message="Device disconnected"
+          duration={800}
+        />
 
-      <IonModal isOpen={recordModal} onDidDismiss={()=>setRecordModal(false)} swipeToClose={true} mode="ios">
-      <IonToolbar>
-              <IonButtons slot="end">
-                <IonButton onClick={() => setRecordModal(false)}>
-                  <IonIcon icon={chevronDownOutline} /> Close this
-                </IonButton>
-              </IonButtons>
-            </IonToolbar>
-        <IonCard>
-        <h2>Record modal</h2>
+        <IonModal
+          isOpen={recordModal}
+          cssClass="recording-modal"
+          onDidDismiss={() => setRecordModal(false)}
+          swipeToClose={true}
+          mode="ios"
+        >
+          <IonToolbar>
+            <IonButtons slot="end">
+              <IonButton onClick={() => setRecordModal(false)}>
+                <IonIcon icon={chevronDownOutline} /> Close this
+              </IonButton>
+            </IonButtons>
+          </IonToolbar>
+          <IonCard>
+            <h2>Monitoring Heart rate</h2>
 
-        <h2>{hrValue}</h2>
-        <IonGrid>
-          <IonRow>
-            {newRecording.map((beat, index)=> <IonCol key={index}>{beat}</IonCol>)}
-            <IonCol>
+            <h2>{hrValue}</h2>
+              <div className="recordings-indicator ion-align-items-end">
+                {newRecording.map((beat, index) => (
+                  <span key={index} className="indicator"
+                  style={{ height: beat * 2 }}></span>
+                ))}
+              </div>
 
-            </IonCol>
-          </IonRow>
-        </IonGrid>
-        </IonCard>
-      </IonModal>
+          </IonCard>
+            <div className="ion-padding">
+
+            <IonButton disabled={newRecording.length === 16 ? false : true} onClick={()=> saveRecording()}>
+              Save this
+            </IonButton>
+            <IonButton onClick={()=> setNewRecording([])}>
+              Clear current recording
+            </IonButton>
+            </div>
+        </IonModal>
 
         <IonHeader collapse="condense">
           <IonToolbar>
@@ -234,7 +260,9 @@ const Tab1: React.FC = () => {
         <IonCard>
           <IonCardContent>
             {bleAvailability ? "🟢" : "🔴"} Bluetooth API is{" "}
-            {bleAvailability ? "supported" : "not supported in this browser or device"}
+            {bleAvailability
+              ? "supported"
+              : "not supported in this browser or device"}
           </IonCardContent>
         </IonCard>
         <IonCard>
@@ -246,19 +274,26 @@ const Tab1: React.FC = () => {
           </IonCardHeader>
 
           <IonCardContent>
-            Record your heart beats, choose the right music synthetiser for you and listen to the resulting song.
-            All recordings are saved locally.
+            Record your heart beats, choose the right music synthetiser for you
+            and listen to the resulting song. All recordings are saved locally.
           </IonCardContent>
           <div className="ion-padding">
-
-          <IonButton  fill="outline"  disabled={!bleAvailability || isPaired} onClick={() => connect_miband()}>
-            Pair 
-            <IonIcon slot="start" icon={bluetooth} />
-          </IonButton>
-          <IonButton  fill="clear" disabled={false} onClick={() => disconnect_miband()}>
-            UnPair 
-            <IonIcon icon={logOutOutline} />
-          </IonButton>
+            <IonButton
+              fill="outline"
+              disabled={!bleAvailability || isPaired}
+              onClick={() => connect_miband()}
+            >
+              Pair
+              <IonIcon slot="start" icon={bluetooth} />
+            </IonButton>
+            <IonButton
+              fill="clear"
+              disabled={!bleAvailability || !isPaired}
+              onClick={() => disconnect_miband()}
+            >
+              UnPair
+              <IonIcon icon={logOutOutline} />
+            </IonButton>
           </div>
         </IonCard>
         <IonCard>
@@ -267,12 +302,18 @@ const Tab1: React.FC = () => {
             <IonCardTitle>Heart Rate (bpm)</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-          <IonBadge color="warning">{hrValue} bpm</IonBadge>
-          <IonProgressBar value={(hrValue - 40)/160}></IonProgressBar>
+            <IonBadge color="warning">{hrValue} bpm</IonBadge>
+            <IonProgressBar value={(hrValue - 40) / 160}></IonProgressBar>
           </IonCardContent>
         </IonCard>
         <IonFab vertical="bottom" horizontal="center" slot="fixed">
-          <IonFabButton disabled={!isPaired} onClick={()=> {setRecordModal(true); handleRecording()}}>
+          <IonFabButton
+            disabled={!isPaired}
+            onClick={() => {
+              setRecordModal(true);
+              handleRecording();
+            }}
+          >
             <IonIcon icon={radioButtonOn} />
           </IonFabButton>
         </IonFab>

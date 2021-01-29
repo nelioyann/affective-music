@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import {
   IonButton,
   IonButtons,
@@ -47,80 +47,95 @@ const Tab2: React.FC = () => {
     id: 0,
   });
 
+  const [localSongs, setLocalSongs] = useState<Song[]>(()=>{
+    const localData = localStorage.getItem("heartbeats");
+    var songs_data = localData ? JSON.parse(localData) : []; 
+    // setSongs(localData ? JSON.parse(localData) : [])
+    return songs_data
+    // console.log(songs_data)
+});
+
+  
   interface Song {
     name: string;
     beats: number[];
     id: number;
   }
-
-  const [songs, setSongs] = useState<Song[]>([
-    {
-      name: "Crescendo",
-      beats: [
-        45,
-        50,
-        55,
-        60,
-        65,
-        70,
-        75,
-        80,
-        85,
-        90,
-        95,
-        100,
-        105,
-        110,
-        115,
-        120,
-      ],
-      id: 20200125124400,
-    },
-    {
-      name: "Diminuendo",
-      beats: [
-        120,
-        115,
-        110,
-        105,
-        100,
-        95,
-        90,
-        85,
-        80,
-        75,
-        70,
-        65,
-        60,
-        55,
-        50,
-        45,
-      ],
-      id: 20200125124401,
-    },
-    {
-      name: "Aleatória",
-      beats: [
-        120,
-        100,
-        85,
-        90,
-        75,
-        55,
-        65,
-        110,
-        80,
-        50,
-        45,
-        115,
-        95,
-        60,
-        70,
-        105,
-      ],
-      id: 20200127103101,
-    },
-  ]);
+//   useEffect(()=>{
+//     const localData = localStorage.getItem("heartbeats");
+//     var songs_data = localData ? JSON.parse(localData) : []; 
+//     // setSongs(localData ? JSON.parse(localData) : [])
+//     console.log(songs_data)
+// }, [])
+let test =[
+  {
+    name: "Crescendo",
+    beats: [
+      45,
+      50,
+      55,
+      60,
+      65,
+      70,
+      75,
+      80,
+      85,
+      90,
+      95,
+      100,
+      105,
+      110,
+      115,
+      120,
+    ],
+    id: 20200125124400,
+  },
+  {
+    name: "Diminuendo",
+    beats: [
+      120,
+      115,
+      110,
+      105,
+      100,
+      95,
+      90,
+      85,
+      80,
+      75,
+      70,
+      65,
+      60,
+      55,
+      50,
+      45,
+    ],
+    id: 20200125124401,
+  },
+  {
+    name: "Aleatória",
+    beats: [
+      120,
+      100,
+      85,
+      90,
+      75,
+      55,
+      65,
+      110,
+      80,
+      50,
+      45,
+      115,
+      95,
+      60,
+      70,
+      105,
+    ],
+    id: 20200127103101,
+  },
+]
+  const [songs, setSongs] = useState<Song[]>([...test, ...localSongs]);
 
   const playSong = (beats: number[]): void => {
     const membrane = new Tone.MembraneSynth().toDestination();
@@ -135,7 +150,7 @@ const Tab2: React.FC = () => {
     let amplitude = "16n";
     // How many notes are played from the beats
     let notes = 4 || beats.length;
-
+    setLocalSongs([...localSongs]) //just to avoid an error
     let loop = new Tone.Loop();
     let index = 0;
     const repeat = () => {

@@ -1,0 +1,13 @@
+.recording-modal .modal-wrapper ion-page{
+    justify-content: space-around;
+}
+
+.recordings-indicator{
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    gap: 1em;
+}
+.recordings-indicator .indicator{
+    background-color: var(--ion-color-primary)	;
+    border-radius: 5px;
+}
