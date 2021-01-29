@@ -189,7 +189,9 @@ let test =[
     setShowModal(true);
 
     console.log("current song set", currentSong);
-    setSongs([...songs]);
+    const localData = localStorage.getItem("heartbeats");
+    let songs_data = localData ? JSON.parse(localData) : [];
+    setSongs([...songs_data]);
     Tone.Transport.start();
     playSong(beats);
     // Tone.Transport.scheduleRepeat(playSong, "1n");
