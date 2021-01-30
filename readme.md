@@ -12,7 +12,7 @@ Music has an influence on heart rate. But how does your heart rate determine the
 
 ### Dependencies
 - Tone.js
-- React-lottie
+- React-lottie npm i --save-dev @types/react-lottie
 
 ## Usecases
 

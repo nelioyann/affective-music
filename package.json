@@ -52,7 +52,8 @@
     ]
   },
   "devDependencies": {
-    "@capacitor/cli": "2.4.6"
+    "@capacitor/cli": "2.4.6",
+    "@types/react-lottie": "^1.2.5"
   },
   "description": "An Ionic project"
 }

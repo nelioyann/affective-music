@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import Lottie from "react-lottie";
+import bluetoothAnimation from "../lotties/bluetooth.json";
+import recordAnimation from "../lotties/record.json";
+import enableAnimation from "../lotties/enable.json";
 import {
   IonButton,
   IonCard,
@@ -25,6 +29,23 @@ const Tab3: React.FC = () => {
   };
 
   const [showInfoModal, setShowInfoModal] = useState(false);
+
+  const btOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: bluetoothAnimation,
+  };
+  const recordOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: recordAnimation,
+  };
+  const enableOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: enableAnimation,
+  };
+
   return (
     <IonPage>
       <IonHeader>
@@ -52,10 +73,7 @@ const Tab3: React.FC = () => {
           <IonCard>
             <IonHeader>
               <IonCardTitle className="ion-padding-horizontal">
-                <h2>
-
-                How does it work
-                </h2>
+                <h2>How does it work</h2>
               </IonCardTitle>
             </IonHeader>
 
@@ -63,8 +81,8 @@ const Tab3: React.FC = () => {
               <p>
                 HeartBeats uses the Web Bluetooth API to connect to your Mi
                 Band. After pairing your device and starting a new workout
-                session, you will be able to record heart rate. These values are then converted in
-                sounds and played sequencially in the player.
+                session, you will be able to record heart rate. These values are
+                then converted in sounds and played sequencially in the player.
               </p>
             </IonCardContent>
           </IonCard>
@@ -99,9 +117,7 @@ const Tab3: React.FC = () => {
             </IonCardContent>
           </IonCard>
 
-          <IonButton onClick={() => setShowInfoModal(false)}>
-            Close 
-          </IonButton>
+          <IonButton onClick={() => setShowInfoModal(false)}>Close</IonButton>
         </IonModal>
         <IonHeader collapse="condense">
           <IonToolbar>
@@ -111,7 +127,8 @@ const Tab3: React.FC = () => {
         <IonSlides mode="ios" pager={true} options={slideOpts}>
           <IonSlide>
             <div>
-              <img src="./assets/logo.png" alt="Logo" />
+              {/* <img src="./assets/logo.png" alt="Logo" /> */}
+              <Lottie options={btOptions} height={200} width={300} />
               <h3>Enable Mi Band Discoverability</h3>
               <p>
                 To allow pairing with HeartBeats, enable device visibility on
@@ -121,7 +138,8 @@ const Tab3: React.FC = () => {
           </IonSlide>
           <IonSlide>
             <div>
-              <img src="./assets/logo.png" alt="Logo" />
+              {/* <img src="./assets/logo.png" alt="Logo" /> */}
+              <Lottie options={enableOptions} height={200} width={300} />
               <h3>Start a Freestyle Workout Session</h3>
               <p>
                 In order to increase the heart rate detection rate, try
@@ -131,7 +149,9 @@ const Tab3: React.FC = () => {
           </IonSlide>
           <IonSlide>
             <div>
-              <img src="./assets/logo.png" alt="Logo" />
+              {/* <img src="./assets/logo.png" alt="Logo" /> */}
+
+              <Lottie options={recordOptions} height={200} width={300} />
               <h3>Pair your device and record </h3>
               <p>
                 Pair your device and record a sample of beats. Then listen to
@@ -141,6 +161,7 @@ const Tab3: React.FC = () => {
                 onClick={() => setShowInfoModal(true)}
                 style={{ borderRadius: "5px" }}
                 color="primary"
+                fill="outline"
               >
                 Learn More
               </IonButton>
