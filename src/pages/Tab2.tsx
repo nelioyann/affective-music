@@ -1,4 +1,7 @@
 import React, {  useState } from "react";
+import recordAnimation from "../lotties/record.json";
+import Lottie from "react-lottie";
+
 import {
   IonButton,
   IonButtons,
@@ -18,8 +21,6 @@ import {
   IonListHeader,
   IonModal,
   IonPage,
-  IonProgressBar,
-  
   IonRow,
   IonSegment,
   IonSegmentButton,
@@ -31,9 +32,6 @@ import {
 import "./Tab2.css";
 import {
   chevronDownOutline,
-  playOutline,
-  stopOutline,
-  volumeMuteOutline,
 } from "ionicons/icons";
 import * as Tone from "tone";
 
@@ -46,7 +44,11 @@ const Tab2: React.FC = () => {
     beats: [],
     id: 0,
   });
-
+  const recordOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: recordAnimation,
+  };
   const [localSongs, setLocalSongs] = useState<Song[]>(()=>{
     const localData = localStorage.getItem("heartbeats");
     var songs_data = localData ? JSON.parse(localData) : []; 
@@ -162,7 +164,7 @@ let test =[
 
   const handleMusicSelection = (
     event: React.MouseEvent<HTMLIonItemElement, MouseEvent>,
-    { name, id, beats }: Song
+    { beats }: Song
   ): void => {
     setShowModal(true);
 
@@ -213,28 +215,26 @@ let test =[
             <IonCardContent>
               <IonItem>
                 {/* <IonLabel slot="start"></IonLabel> */}
-                <IonProgressBar
-                  color="primary"
-                  type="indeterminate"
-                  value={1}
-                ></IonProgressBar>
+                
+                <Lottie options={recordOptions} height={100} width={300} />
+
                 {/* <IonLabel slot="end">00:00</IonLabel> */}
               </IonItem>
 
               {/* Play Button */}
-              <IonButton disabled={true} fill="clear" mode="ios">
+              {/* <IonButton disabled={true} fill="clear" mode="ios">
                 <IonIcon icon={playOutline} />
-              </IonButton>
+              </IonButton> */}
 
               {/* Pause Button */}
-              <IonButton disabled={true} fill="clear" mode="ios">
+              {/* <IonButton disabled={true} fill="clear" mode="ios">
                 <IonIcon icon={volumeMuteOutline} />
-              </IonButton>
+              </IonButton> */}
 
               {/* Stop Button */}
-              <IonButton disabled={true} fill="clear" mode="ios">
+              {/* <IonButton disabled={true} fill="clear" mode="ios">
                 <IonIcon icon={stopOutline} />
-              </IonButton>
+              </IonButton> */}
             </IonCardContent>
           </IonCard>
 
