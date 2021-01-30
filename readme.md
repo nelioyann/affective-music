@@ -12,6 +12,7 @@ Music has an influence on heart rate. But how does your heart rate determine the
 
 ### Dependencies
 - Tone.js
+- React-lottie
 
 ## Usecases
 
@@ -33,7 +34,7 @@ Just for fun, nothing more, nothing less.
 
 # SEO
 - [ ] Add Robot.txt
-- [ ] Add Icons for IOS, Android and Desktop
+- [x] Add Icons for IOS, Android and Desktop
 
 
 

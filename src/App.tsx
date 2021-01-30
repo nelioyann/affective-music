@@ -55,7 +55,7 @@ const App: React.FC = () => (
           </IonTabButton>
           <IonTabButton tab="info" href="/info">
             <IonIcon icon={informationCircleOutline} />
-            <IonLabel>Info</IonLabel>
+            <IonLabel>Tutorial</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
