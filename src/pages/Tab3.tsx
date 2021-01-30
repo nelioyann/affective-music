@@ -6,6 +6,9 @@ import {
   IonCardTitle,
   IonContent,
   IonHeader,
+  IonItem,
+  IonLabel,
+  IonList,
   IonModal,
   IonPage,
   IonSlide,
@@ -30,35 +33,71 @@ const Tab3: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonModal isOpen={showInfoModal} swipeToClose={true}>
-          <IonCard>
+        <IonModal
+          isOpen={showInfoModal}
+          swipeToClose={true}
+          mode="ios"
+          onDidDismiss={() => setShowInfoModal(false)}
+        >
+          {/* <IonCard>
             <IonHeader>
-              <IonCardTitle>About HeartBeats</IonCardTitle>
+              <IonCardTitle>
+                <h2>About HeartBeats</h2>
+              </IonCardTitle>
             </IonHeader>
 
             <IonCardContent>Heartbeats</IonCardContent>
-          </IonCard>
-
+          </IonCard> */}
 
           <IonCard>
             <IonHeader>
-              <IonCardTitle>How does it work</IonCardTitle>
+              <IonCardTitle>
+                <h2>How does it work</h2>
+              </IonCardTitle>
             </IonHeader>
 
-            <IonCardContent>Heartbeats</IonCardContent>
+            <IonCardContent>
+              <p>
+                Heartbeats uses the Web Bluetooth API to connect to your Mi
+                Band. After pairing your device and starting a new workout
+                session, you will be able to record heart rate. These values are then converted in
+                sounds and played sequencially in the player.
+              </p>
+            </IonCardContent>
           </IonCard>
           <IonCard>
             <IonHeader>
-              <IonCardTitle>What do I need</IonCardTitle>
+              <IonCardTitle>
+                <h2>What do I need</h2>
+              </IonCardTitle>
             </IonHeader>
 
-            <IonCardContent>You will need a phone with a modern browser that supports the Web
-            Bluetooth API.</IonCardContent>
+            <IonCardContent>
+              <IonList>
+                <IonItem>
+                  <IonLabel>
+                    <h3>Android device</h3>
+                    <p>The Web Bluetooth API is not supported on IOS</p>
+                  </IonLabel>
+                </IonItem>
+                <IonItem>
+                  <IonLabel>
+                    <h3>Browser with Web Bluetooth API Support</h3>
+                    <p>Google Chrome</p>
+                  </IonLabel>
+                </IonItem>
+                <IonItem>
+                  <IonLabel>
+                    <h3>Mi Fit App</h3>
+                    <p>Allows you to enable discoverability</p>
+                  </IonLabel>
+                </IonItem>
+              </IonList>
+            </IonCardContent>
           </IonCard>
-          
 
           <IonButton onClick={() => setShowInfoModal(false)}>
-            Close Info
+            Close 
           </IonButton>
         </IonModal>
         <IonHeader collapse="condense">

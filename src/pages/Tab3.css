@@ -2,7 +2,7 @@ ion-slides {
     height: 100%;
   }
 .swiper-slide {
-    display: block;
+    display: flex;
   }
 
   .swiper-slide h2 {
