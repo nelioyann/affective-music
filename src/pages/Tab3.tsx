@@ -51,14 +51,17 @@ const Tab3: React.FC = () => {
 
           <IonCard>
             <IonHeader>
-              <IonCardTitle>
-                <h2>How does it work</h2>
+              <IonCardTitle className="ion-padding-horizontal">
+                <h2>
+
+                How does it work
+                </h2>
               </IonCardTitle>
             </IonHeader>
 
             <IonCardContent>
               <p>
-                Heartbeats uses the Web Bluetooth API to connect to your Mi
+                HeartBeats uses the Web Bluetooth API to connect to your Mi
                 Band. After pairing your device and starting a new workout
                 session, you will be able to record heart rate. These values are then converted in
                 sounds and played sequencially in the player.
@@ -67,12 +70,12 @@ const Tab3: React.FC = () => {
           </IonCard>
           <IonCard>
             <IonHeader>
-              <IonCardTitle>
+              <IonCardTitle className="ion-padding-horizontal">
                 <h2>What do I need</h2>
               </IonCardTitle>
             </IonHeader>
 
-            <IonCardContent>
+            <IonCardContent className="ion-no-padding">
               <IonList>
                 <IonItem>
                   <IonLabel>

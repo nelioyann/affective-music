@@ -222,17 +222,17 @@ let test =[
               </IonItem>
 
               {/* Play Button */}
-              <IonButton fill="clear" mode="ios">
+              <IonButton disabled={true} fill="clear" mode="ios">
                 <IonIcon icon={playOutline} />
               </IonButton>
 
               {/* Pause Button */}
-              <IonButton fill="clear" mode="ios">
+              <IonButton disabled={true} fill="clear" mode="ios">
                 <IonIcon icon={volumeMuteOutline} />
               </IonButton>
 
               {/* Stop Button */}
-              <IonButton fill="clear" mode="ios">
+              <IonButton disabled={true} fill="clear" mode="ios">
                 <IonIcon icon={stopOutline} />
               </IonButton>
             </IonCardContent>
