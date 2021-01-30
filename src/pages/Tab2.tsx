@@ -91,28 +91,6 @@ let test =[
     id: 20200125124400,
   },
   {
-    name: "Diminuendo",
-    beats: [
-      120,
-      115,
-      110,
-      105,
-      100,
-      95,
-      90,
-      85,
-      80,
-      75,
-      70,
-      65,
-      60,
-      55,
-      50,
-      45,
-    ],
-    id: 20200125124401,
-  },
-  {
     name: "Aleatória",
     beats: [
       120,
@@ -191,7 +169,7 @@ let test =[
     console.log("current song set", currentSong);
     const localData = localStorage.getItem("heartbeats");
     let songs_data = localData ? JSON.parse(localData) : [];
-    setSongs([...songs_data]);
+    setSongs([...test,...songs_data]);
     Tone.Transport.start();
     playSong(beats);
     // Tone.Transport.scheduleRepeat(playSong, "1n");

@@ -70,10 +70,10 @@ const Tab3: React.FC = () => {
           <IonSlide>
             <div>
               <img src="./assets/logo.png" alt="Logo" />
-              <h3>Enable Mi Band Visibility</h3>
+              <h3>Enable Mi Band Discoverability</h3>
               <p>
                 To allow pairing with HeartBeats, enable device visibility on
-                the Mi Fit App.{" "}
+                the Mi Fit App.
               </p>
             </div>
           </IonSlide>

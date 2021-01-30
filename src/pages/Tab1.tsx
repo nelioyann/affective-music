@@ -47,6 +47,7 @@ const Tab1: React.FC = () => {
   const [song, setSong] = useState<Song>()
 
   const [pairedToast, setPairedToast] = useState(false);
+  const [recordedToast, setRecordedToast] = useState(false);
   const [disconnectedToast, setDisconnectedToast] = useState(false);
   const [device, setDevice] = useState<any>()
 
@@ -190,7 +191,10 @@ const Tab1: React.FC = () => {
       beats: newRecording,
       id
     }
-    setSong(newSong)
+    setSong(newSong) 
+    setRecordedToast(true) // Notify the user of the saving
+    setNewRecording([]) // Empty current recording
+    setRecordModal(false) // Hide the modal
     // Toast Saved
    
     // console.table(song)
@@ -212,6 +216,11 @@ const Tab1: React.FC = () => {
         <IonToast
           isOpen={disconnectedToast}
           message="Device disconnected"
+          duration={800}
+        />
+        <IonToast
+          isOpen={recordedToast}
+          message="New recording saved"
           duration={800}
         />
 
