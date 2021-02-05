@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import bluetoothAnimation from "../lotties/bluetooth.json";
+import recordAnimation from "../lotties/record.json";
+import enableAnimation from "../lotties/enable.json";
 // import * as Tone from "tone";
 import {
   IonContent,
@@ -20,6 +23,8 @@ import {
   IonFabButton,
   IonModal,
   IonButtons,
+  IonSlide,
+  IonSlides,
 } from "@ionic/react";
 
 // import ExploreContainer from "../components/ExploreContainer";
@@ -27,9 +32,12 @@ import "./Tab1.css";
 import {
   bluetooth,
   chevronDownOutline,
+  closeOutline,
+  fitnessOutline,
+  helpCircleOutline,
   logOutOutline,
-  radioButtonOn,
 } from "ionicons/icons";
+import Lottie from "react-lottie";
 
 const Tab1: React.FC = () => {
   // let mobileNavigatorObject: any = window.navigator;
@@ -44,12 +52,37 @@ const Tab1: React.FC = () => {
   const [hrValue, setHrValue] = useState(0);
   const [recordModal, setRecordModal] = useState(false);
   const [newRecording, setNewRecording] = useState<number[]>([]);
-  const [song, setSong] = useState<Song>()
+  const [song, setSong] = useState<Song>();
+
+  const [tutorialModal, setTutorialModal] = useState(true);
 
   const [pairedToast, setPairedToast] = useState(false);
   const [recordedToast, setRecordedToast] = useState(false);
   const [disconnectedToast, setDisconnectedToast] = useState(false);
-  const [device, setDevice] = useState<any>()
+  const [device, setDevice] = useState<any>();
+
+  const slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+  };
+
+  // const [showInfoModal, setShowInfoModal] = useState(false);
+
+  const btOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: bluetoothAnimation,
+  };
+  const recordOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: recordAnimation,
+  };
+  const enableOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: enableAnimation,
+  };
 
   useEffect(() => {
     checkBlAvailability();
@@ -58,18 +91,18 @@ const Tab1: React.FC = () => {
   useEffect(() => {
     // console.log("it changed");
     if (newRecording.length < 16 && hrValue !== 0) {
-      setNewRecording(newRecording => [...newRecording, hrValue]);
+      setNewRecording((newRecording) => [...newRecording, hrValue]);
     }
     // eslint-disable-next-line
   }, [hrValue]);
 
   useEffect(() => {
     // console.log("it changed", song);
-    if (song){
+    if (song) {
       const localData = localStorage.getItem("heartbeats");
-      let data =  localData ? JSON.parse(localData) : []
-      data.push(song)
-      localStorage.setItem("heartbeats", JSON.stringify(data))
+      let data = localData ? JSON.parse(localData) : [];
+      data.push(song);
+      localStorage.setItem("heartbeats", JSON.stringify(data));
     }
     // setNewRecording([...newRecording, hrValue])
   }, [song]);
@@ -168,51 +201,52 @@ const Tab1: React.FC = () => {
     }
   };
 
-  const disconnect_miband =  () => {
+  const disconnect_miband = () => {
     console.log("I wish to disconnect");
     // navigator.bluetooth.getDevices()
     if (!device) return;
     // console.log(server)
-    if(device && device?.gatt){
-      console.log("disconnecting device")
-      if(device.gatt.connected) device.gatt.disconnect();
+    if (device && device?.gatt) {
+      console.log("disconnecting device");
+      if (device.gatt.connected) device.gatt.disconnect();
       // TODO add a notification
-      setIsPaired(false)
-      setDisconnectedToast(true)
-      console.log("device disconnected")
+      setIsPaired(false);
+      setDisconnectedToast(true);
+      console.log("device disconnected");
     }
   };
 
-  const saveRecording = () =>{
+  const saveRecording = () => {
     console.log("I wish to record");
-    let id = Date.now()
+    let id = Date.now();
     let newSong: Song = {
       name: `Song_${id}`,
       beats: newRecording,
-      id
-    }
-    setSong(newSong) 
-    setRecordedToast(true) // Notify the user of the saving
-    setNewRecording([]) // Empty current recording
-    setRecordModal(false) // Hide the modal
+      id,
+    };
+    setSong(newSong);
+    setRecordedToast(true); // Notify the user of the saving
+    setNewRecording([]); // Empty current recording
+    setRecordModal(false); // Hide the modal
     // Toast Saved
-   
+
     // console.table(song)
-  }
+  };
   const handleRecording = () => {};
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>HeartBeats</IonTitle>
+          <IonButtons slot="end">
+            <IonButton onClick={() => setTutorialModal(true)}>
+              <IonIcon icon={helpCircleOutline} />
+            </IonButton>
+          </IonButtons>
+          <IonTitle>Home</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonToast
-          isOpen={pairedToast}
-          message="Device paired"
-          duration={500}
-        />
+        <IonToast isOpen={pairedToast} message="Device paired" duration={500} />
         <IonToast
           isOpen={disconnectedToast}
           message="Device disconnected"
@@ -223,6 +257,71 @@ const Tab1: React.FC = () => {
           message="New recording saved"
           duration={800}
         />
+
+        <IonModal
+          isOpen={tutorialModal}
+          cssClass="recording-modal"
+          onDidDismiss={() => setTutorialModal(false)}
+          swipeToClose={true}
+          mode="ios"
+        >
+          <IonSlides mode="ios" pager={true} options={slideOpts}>
+            <IonSlide>
+              <div>
+                {/* <img src="./assets/logo.png" alt="Logo" /> */}
+                <Lottie options={btOptions} height={200} width={300} />
+                <h3>Enable your Mi Band discoverability</h3>
+                <p>
+                  To allow this app to connect to your device, enable the band discoverability in the settings of
+                  the Mi Fit app.
+                </p>
+                <IonButton
+                  onClick={() => setTutorialModal(false)}
+                  color="secondary"
+                  fill="outline"
+                >
+                  <IonIcon icon={closeOutline}/>
+                </IonButton>
+              </div>
+            </IonSlide>
+            <IonSlide>
+              <div>
+                {/* <img src="./assets/logo.png" alt="Logo" /> */}
+                <Lottie options={enableOptions} height={200} width={300} />
+                <h3>2. Start a Freestyle Workout Session</h3>
+                <p>
+                  In order to increase the heart rate detection rate, 
+                  launch a workout exercise session on your Mi Band (you can end the session after the recording)
+                </p>
+                <IonButton
+                  onClick={() => setTutorialModal(false)}
+                  color="secondary"
+                  fill="outline"
+                >
+                  <IonIcon icon={closeOutline}/>
+                </IonButton>
+              </div>
+            </IonSlide>
+            <IonSlide>
+              <div>
+                {/* <img src="./assets/logo.png" alt="Logo" /> */}
+
+                <Lottie options={recordOptions} height={200} width={300} />
+                <h3>Pair your device and record </h3>
+                <p>
+                  Pair your device and record a sample of beats. The recording will be automatically added to your playlist.
+                </p>
+                <IonButton
+                  onClick={() => setTutorialModal(false)}
+                  color="primary"
+                  fill="outline"
+                >
+                  <IonIcon icon={closeOutline}/>
+                </IonButton>
+              </div>
+            </IonSlide>
+          </IonSlides>
+        </IonModal>
 
         <IonModal
           isOpen={recordModal}
@@ -242,23 +341,27 @@ const Tab1: React.FC = () => {
             <h2>Monitoring Heart rate</h2>
 
             <h2>{hrValue}</h2>
-              <div className="recordings-indicator ion-align-items-end">
-                {newRecording.map((beat, index) => (
-                  <span key={index} className="indicator"
-                  style={{ height: beat * 2 }}></span>
-                ))}
-              </div>
-
+            <div className="recordings-indicator ion-align-items-end">
+              {newRecording.map((beat, index) => (
+                <span
+                  key={index}
+                  className="indicator"
+                  style={{ height: beat * 2 }}
+                ></span>
+              ))}
+            </div>
           </IonCard>
-            <div className="ion-padding">
-
-            <IonButton disabled={newRecording.length === 16 ? false : true} onClick={()=> saveRecording()}>
+          <div className="ion-padding">
+            <IonButton
+              disabled={newRecording.length === 16 ? false : true}
+              onClick={() => saveRecording()}
+            >
               Save this
             </IonButton>
-            <IonButton onClick={()=> setNewRecording([])}>
+            <IonButton onClick={() => setNewRecording([])}>
               Clear current recording
             </IonButton>
-            </div>
+          </div>
         </IonModal>
 
         <IonHeader collapse="condense">
@@ -324,7 +427,7 @@ const Tab1: React.FC = () => {
               handleRecording();
             }}
           >
-            <IonIcon icon={radioButtonOn} />
+            <IonIcon icon={fitnessOutline} />
           </IonFabButton>
         </IonFab>
       </IonContent>

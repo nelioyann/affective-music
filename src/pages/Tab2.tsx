@@ -3,6 +3,7 @@ import recordAnimation from "../lotties/record.json";
 import Lottie from "react-lottie";
 
 import {
+  IonBackButton,
   IonButton,
   IonButtons,
   IonCard,
@@ -180,6 +181,9 @@ let test =[
     <IonPage>
       <IonHeader>
         <IonToolbar>
+        <IonButtons slot="end">
+          <IonBackButton defaultHref="/home" />
+          </IonButtons>
           <IonTitle>Playlist</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -199,7 +203,7 @@ let test =[
             <IonToolbar>
               <IonButtons slot="end">
                 <IonButton onClick={() => setShowModal(false)}>
-                  <IonIcon icon={chevronDownOutline} /> Close this
+                  <IonIcon icon={chevronDownOutline} /> Close 
                 </IonButton>
               </IonButtons>
             </IonToolbar>
@@ -251,7 +255,7 @@ let test =[
         </IonHeader>
         <IonCard>
           <IonCardHeader>
-            <IonCardTitle>Select a synth</IonCardTitle>
+            <IonCardTitle>Change the used instrument</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
             <IonSegment
