@@ -181,7 +181,7 @@ let test =[
     <IonPage>
       <IonHeader>
         <IonToolbar>
-        <IonButtons slot="end">
+        <IonButtons slot="start">
           <IonBackButton defaultHref="/home" />
           </IonButtons>
           <IonTitle>Playlist</IonTitle>
