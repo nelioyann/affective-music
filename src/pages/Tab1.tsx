@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import bluetoothAnimation from "../lotties/bluetooth.json";
 import recordAnimation from "../lotties/record.json";
 import enableAnimation from "../lotties/enable.json";
@@ -30,9 +30,9 @@ import {
 // import ExploreContainer from "../components/ExploreContainer";
 import "./Tab1.css";
 import {
+  arrowForward,
   bluetooth,
   chevronDownOutline,
-  closeOutline,
   fitnessOutline,
   helpCircleOutline,
   logOutOutline,
@@ -215,6 +215,7 @@ const Tab1: React.FC = () => {
       console.log("device disconnected");
     }
   };
+  const tutoSlideRef = useRef(null)
 
   const saveRecording = () => {
     console.log("I wish to record");
@@ -239,6 +240,7 @@ const Tab1: React.FC = () => {
         <IonToolbar>
           <IonButtons slot="end">
             <IonButton onClick={() => setTutorialModal(true)}>
+              Tutorial
               <IonIcon icon={helpCircleOutline} />
             </IonButton>
           </IonButtons>
@@ -265,23 +267,23 @@ const Tab1: React.FC = () => {
           swipeToClose={true}
           mode="ios"
         >
-          <IonSlides mode="ios" pager={true} options={slideOpts}>
+          <IonSlides ref={tutoSlideRef} mode="ios" pager={true} options={slideOpts}>
             <IonSlide>
               <div>
                 {/* <img src="./assets/logo.png" alt="Logo" /> */}
                 <Lottie options={btOptions} height={200} width={300} />
-                <h3>Enable your Mi Band discoverability</h3>
+                <h3>1. Enable your Mi Band discoverability</h3>
                 <p>
                   To allow this app to connect to your device, enable the band discoverability in the settings of
                   the Mi Fit app.
                 </p>
-                <IonButton
+                {/* <IonButton
                   onClick={() => setTutorialModal(false)}
-                  color="secondary"
+                  color="primary"
                   fill="outline"
                 >
                   <IonIcon icon={closeOutline}/>
-                </IonButton>
+                </IonButton> */}
               </div>
             </IonSlide>
             <IonSlide>
@@ -293,13 +295,13 @@ const Tab1: React.FC = () => {
                   In order to increase the heart rate detection rate, 
                   launch a workout exercise session on your Mi Band (you can end the session after the recording)
                 </p>
-                <IonButton
+                {/* <IonButton
                   onClick={() => setTutorialModal(false)}
-                  color="secondary"
+                  color="tertiary"
                   fill="outline"
                 >
                   <IonIcon icon={closeOutline}/>
-                </IonButton>
+                </IonButton> */}
               </div>
             </IonSlide>
             <IonSlide>
@@ -307,16 +309,17 @@ const Tab1: React.FC = () => {
                 {/* <img src="./assets/logo.png" alt="Logo" /> */}
 
                 <Lottie options={recordOptions} height={200} width={300} />
-                <h3>Pair your device and record </h3>
+                <h3>3. Pair your device and record </h3>
                 <p>
                   Pair your device and record a sample of beats. The recording will be automatically added to your playlist.
                 </p>
                 <IonButton
                   onClick={() => setTutorialModal(false)}
-                  color="primary"
+                  color="tertiary"
                   fill="outline"
                 >
-                  <IonIcon icon={closeOutline}/>
+                  Get started
+                  <IonIcon icon={arrowForward}/>
                 </IonButton>
               </div>
             </IonSlide>
@@ -333,14 +336,16 @@ const Tab1: React.FC = () => {
           <IonToolbar>
             <IonButtons slot="end">
               <IonButton onClick={() => setRecordModal(false)}>
-                <IonIcon icon={chevronDownOutline} /> Close this
+                <IonIcon icon={chevronDownOutline} /> Close
               </IonButton>
             </IonButtons>
           </IonToolbar>
           <IonCard>
-            <h2>Monitoring Heart rate</h2>
 
-            <h2>{hrValue}</h2>
+            <h2>Monitoring Heart rate</h2>
+            <p>Each track is composed of 16 heart rate measurements</p>
+
+            <h2>{hrValue} bpm</h2>
             <div className="recordings-indicator ion-align-items-end">
               {newRecording.map((beat, index) => (
                 <span
@@ -387,8 +392,10 @@ const Tab1: React.FC = () => {
           </IonCardHeader>
 
           <IonCardContent>
-            Record your heart beats, choose the right music synthetiser for you
-            and listen to the resulting song. All recordings are saved locally.
+            This is a simple web application that transforms sequences of heart rate measurements into a melody. 
+            Recordings can be made through the use of a Xiaomi Mi Band smartwatch. All recordings are saved locally. 
+
+            
           </IonCardContent>
           <div className="ion-padding">
             <IonButton

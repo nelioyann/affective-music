@@ -255,7 +255,7 @@ let test =[
         </IonHeader>
         <IonCard>
           <IonCardHeader>
-            <IonCardTitle>Change the used instrument</IonCardTitle>
+            <IonCardTitle>Ajust the instrument for a different result</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
             <IonSegment

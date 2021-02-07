@@ -79,7 +79,7 @@ const Tab3: React.FC = () => {
           <IonCard>
             <IonHeader>
               <IonCardTitle className="ion-padding-horizontal">
-                <h2>What do I need</h2>
+                <h2>What do I need ?</h2>
               </IonCardTitle>
             </IonHeader>
 
@@ -103,7 +103,26 @@ const Tab3: React.FC = () => {
                     <p>Allows you to enable discoverability</p>
                   </IonLabel>
                 </IonItem>
+                <IonItem>
+                  <IonLabel>
+                    <h3>Xiaomi Mi Smart Band</h3>
+                    <p>The Xiaomi Mi Smart Band is an afffordable fitness tracker that allows you to record your heart rate.</p>
+                  </IonLabel>
+                </IonItem>
               </IonList>
+            </IonCardContent>
+          </IonCard>
+          <IonCard>
+            <IonHeader>
+              <IonCardTitle className="ion-padding-horizontal">
+                <h2>Don't have these tools ? </h2>
+              </IonCardTitle>
+            </IonHeader>
+
+            <IonCardContent>
+              <p>
+                You can still test the app with the test tracks "Crescendo" and "Aleatoria"
+              </p>
             </IonCardContent>
           </IonCard>
       </IonContent>
