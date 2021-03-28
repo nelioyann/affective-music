@@ -428,7 +428,7 @@ const Tab1: React.FC = () => {
         </IonCard>
         <IonFab vertical="bottom" horizontal="center" slot="fixed">
           <IonFabButton
-            disabled={!isPaired}
+            hidden={!isPaired}
             onClick={() => {
               setRecordModal(true);
               handleRecording();

@@ -51,7 +51,8 @@ const Tab2: React.FC = () => {
     animationData: recordAnimation,
   };
   const [localSongs, setLocalSongs] = useState<Song[]>(()=>{
-    const localData = localStorage.getItem("heartbeats");
+    
+    const localData = localStorage?.getItem("heartbeats");
     var songs_data = localData ? JSON.parse(localData) : []; 
     // setSongs(localData ? JSON.parse(localData) : [])
     return songs_data
@@ -64,12 +65,7 @@ const Tab2: React.FC = () => {
     beats: number[];
     id: number;
   }
-//   useEffect(()=>{
-//     const localData = localStorage.getItem("heartbeats");
-//     var songs_data = localData ? JSON.parse(localData) : []; 
-//     // setSongs(localData ? JSON.parse(localData) : [])
-//     console.log(songs_data)
-// }, [])
+
 let test =[
   {
     name: "Crescendo",
@@ -170,7 +166,7 @@ let test =[
     setShowModal(true);
 
     console.log("current song set", currentSong);
-    const localData = localStorage.getItem("heartbeats");
+    const localData = localStorage?.getItem("heartbeats");
     let songs_data = localData ? JSON.parse(localData) : [];
     setSongs([...test,...songs_data]);
     Tone.Transport.start();
