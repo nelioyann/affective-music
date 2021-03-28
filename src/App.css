@@ -1,4 +1,7 @@
-.ion-app{
-    max-width: 900px;
-    margin: auto;
+ion-content{
+    width: clamp(15em, 100%, 70em) ;
+    margin: 0px auto !important;
+}
+.ion-page{
+    align-items: center
 }
