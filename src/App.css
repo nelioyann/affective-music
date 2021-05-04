@@ -5,3 +5,12 @@ ion-content{
 .ion-page{
     align-items: center
 }
+
+ion-toolbar{
+    border-bottom: 2px solid var(--ion-color-primary);
+}
+
+ion-segment-button{
+    --color-checked: rgb(0, 0, 0);
+    --indicator-color : white!important;
+}
